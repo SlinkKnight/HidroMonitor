@@ -70,7 +70,7 @@ function Index() {
           </div>
         </nav>
 
-        <div className="relative z-10 mx-auto grid w-full max-w-6xl flex-1 items-center gap-10 px-6 py-10 md:grid-cols-2">
+        <div className="relative z-10 mx-auto grid w-full max-w-6xl flex-1 items-center gap-10 px-6 pb-10 pt-28 md:grid-cols-2 md:pt-24">
           <div style={{ transform: `translateY(${scrollY * -0.12}px)` }}>
             <p className="mb-4 inline-block rounded-full bg-deep-foreground/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
               Certificado ABNT NBR 15538
