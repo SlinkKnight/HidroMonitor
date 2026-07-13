@@ -251,7 +251,7 @@ function Index() {
 
         {/* ===== SPECS BAND with wave ===== */}
         <section className="relative bg-primary text-primary-foreground">
-          <Wave className="absolute -top-px left-0 h-16 w-full rotate-180 text-background md:h-24" flip />
+          
           <div className="mx-auto max-w-6xl px-6 pb-20 pt-28 md:pb-28 md:pt-36">
             <h2 className="text-center text-3xl font-bold md:text-4xl">Ficha técnica</h2>
             <div className="mt-12 grid grid-cols-2 gap-8 text-center md:grid-cols-4">
