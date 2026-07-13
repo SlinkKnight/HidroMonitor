@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import hidrometro from "@/assets/hidrometro.png";
+
 
 export const Route = createFileRoute("/")({
   component: Index,
