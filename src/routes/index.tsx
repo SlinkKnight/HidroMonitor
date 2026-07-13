@@ -131,9 +131,18 @@ function Index() {
 
         <nav className="fixed inset-x-0 top-0 z-50">
           <div className="mx-auto mt-3 flex w-[min(72rem,calc(100%-1.5rem))] items-center justify-between rounded-full border border-white/20 bg-white/10 px-5 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.18)] backdrop-blur-xl">
-            <span className="font-display text-xl font-semibold tracking-tight text-deep-foreground">
+            <a href="/" className="flex items-center gap-2.5 font-display text-xl font-semibold tracking-tight text-deep-foreground">
+              <svg width="28" height="28" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="2.5" className="text-accent" />
+                <path
+                  d="M20 8c-4 6-8 10-8 16a8 8 0 1 0 16 0c0-6-4-10-8-16Z"
+                  fill="currentColor"
+                  className="text-primary"
+                />
+                <circle cx="20" cy="24" r="3" fill="currentColor" className="text-deep" />
+              </svg>
               Hidro<span className="text-accent">Flux</span>
-            </span>
+            </a>
             <div className="flex items-center gap-4">
               <a
                 href="#produto"
@@ -242,7 +251,6 @@ function Index() {
 
         {/* ===== SPECS BAND with wave ===== */}
         <section className="relative bg-primary text-primary-foreground">
-          <Wave className="absolute -top-px left-0 h-16 w-full rotate-180 text-background md:h-24" flip />
           <div className="mx-auto max-w-6xl px-6 pb-20 pt-28 md:pb-28 md:pt-36">
             <h2 className="text-center text-3xl font-bold md:text-4xl">Ficha técnica</h2>
             <div className="mt-12 grid grid-cols-2 gap-8 text-center md:grid-cols-4">
