@@ -48,16 +48,26 @@ function Index() {
           <div className="absolute right-0 top-1/3 h-96 w-96 rounded-full bg-accent/20 blur-3xl" />
         </div>
 
-        <nav className="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
-          <span className="font-display text-xl font-bold tracking-tight">
-            Hidro<span className="text-accent">Flux</span>
-          </span>
-          <a
-            href={`https://wa.me/${WHATSAPP}`}
-            className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105"
-          >
-            Comprar agora
-          </a>
+        <nav className="fixed inset-x-0 top-0 z-50">
+          <div className="mx-auto mt-3 flex w-[min(72rem,calc(100%-1.5rem))] items-center justify-between rounded-full border border-white/20 bg-white/10 px-5 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.18)] backdrop-blur-xl">
+            <span className="font-display text-xl font-semibold tracking-tight text-deep-foreground">
+              Hidro<span className="text-accent">Flux</span>
+            </span>
+            <div className="flex items-center gap-4">
+              <a
+                href="#produto"
+                className="hidden text-sm font-medium text-deep-foreground/80 transition-colors hover:text-deep-foreground sm:inline"
+              >
+                Produto
+              </a>
+              <a
+                href={`https://wa.me/${WHATSAPP}`}
+                className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105"
+              >
+                Comprar agora
+              </a>
+            </div>
+          </div>
         </nav>
 
         <div className="relative z-10 mx-auto grid w-full max-w-6xl flex-1 items-center gap-10 px-6 py-10 md:grid-cols-2">
