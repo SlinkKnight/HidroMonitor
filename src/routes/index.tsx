@@ -135,8 +135,8 @@ function Index() {
             <a href="/" className="flex items-center gap-2.5 font-display text-xl font-semibold tracking-tight text-deep-foreground">
               <img
                 src={logo}
-                width="28"
-                height="28"
+                width="40"
+                height="40"
                 alt=""
                 aria-hidden="true"
               />
