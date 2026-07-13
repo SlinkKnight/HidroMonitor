@@ -132,16 +132,13 @@ function Index() {
         <nav className="fixed inset-x-0 top-0 z-50">
           <div className="mx-auto mt-3 flex w-[min(72rem,calc(100%-1.5rem))] items-center justify-between rounded-full border border-white/20 bg-white/10 px-5 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.18)] backdrop-blur-xl">
             <a href="/" className="flex items-center gap-2.5 font-display text-xl font-semibold tracking-tight text-deep-foreground">
-              <svg width="28" height="28" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="2.5" className="text-accent" />
-                <path
-                  d="M20 8c-4 6-8 10-8 16a8 8 0 1 0 16 0c0-6-4-10-8-16Z"
-                  fill="currentColor"
-                  className="text-primary"
-                />
-                <circle cx="20" cy="24" r="3" fill="currentColor" className="text-deep" />
-              </svg>
-              Hidro<span className="text-accent">Flux</span>
+              <img
+                src="/assets/upscalemedia-transformed.png"
+                width="28"
+                height="28"
+                alt=""
+                aria-hidden="true"
+              />
             </a>
             <div className="flex items-center gap-4">
               <a
