@@ -140,10 +140,10 @@ function Index() {
                 alt=""
                 aria-hidden="true"
               />
-              <span>
-                <span style={{ color: "#16309A" }}>Hidro</span>
-                <span style={{ color: "#2B9FE6" }}>Monitor</span>
-              </span>
+            <span style={{ fontFamily: "var(--font-sans)" }}>
+              <span style={{ color: "#16309A" }}>Hidro</span>
+              <span style={{ color: "#2B9FE6" }}>Monitor</span>
+            </span>
             </a>
             <div className="flex items-center gap-4">
               <a
