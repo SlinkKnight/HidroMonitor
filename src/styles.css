@@ -31,7 +31,7 @@
   --color-ring: var(--ring);
   --color-deep: var(--deep);
   --color-deep-foreground: var(--deep-foreground);
-  --font-display: "Bricolage Grotesque", sans-serif;
+  --font-display: "Fraunces", "Georgia", serif;
   --font-sans: "Inter", sans-serif;
 }
 
