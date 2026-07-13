@@ -133,7 +133,7 @@ function Index() {
           <div className="mx-auto mt-3 flex w-[min(72rem,calc(100%-1.5rem))] items-center justify-between rounded-full border border-white/20 bg-white/10 px-5 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.18)] backdrop-blur-xl">
             <a href="/" className="flex items-center gap-2.5 font-display text-xl font-semibold tracking-tight text-deep-foreground">
               <img
-                src="/assets/upscalemedia-transformed.png"
+                src="src\assets\upscalemedia-transformed.png"
                 width="28"
                 height="28"
                 alt=""
