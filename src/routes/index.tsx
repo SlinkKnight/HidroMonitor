@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import hidrometro from "@/assets/hidrometro.png";
+
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -22,6 +22,87 @@ function Wave({ className = "", flip = false }: { className?: string; flip?: boo
           d="M0,60 C240,110 480,10 720,60 C960,110 1200,10 1440,60 C1680,110 1920,10 2160,60 C2400,110 2640,10 2880,60 L2880,120 L0,120 Z"
         />
       </svg>
+    </div>
+  );
+}
+
+function DashboardCard() {
+  return (
+    <div className="float-slow w-full max-w-md rounded-3xl border border-white/10 bg-card p-6 text-card-foreground shadow-2xl">
+      <div className="flex items-start justify-between">
+        <div>
+          <p className="text-sm text-muted-foreground">Prévia do dashboard</p>
+          <p className="mt-1 font-display text-4xl font-bold tracking-tight text-foreground">
+            1.240 L
+          </p>
+        </div>
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-primary">
+          <span className="h-2 w-2 rounded-full bg-primary" />
+          exemplo
+        </span>
+      </div>
+
+      <div className="mt-6 grid grid-cols-3 gap-3">
+        {[
+          ["Hoje", "120 L"],
+          ["Semana", "890 L"],
+          ["Mês", "3.4 m³"],
+        ].map(([k, v]) => (
+          <div key={k} className="rounded-2xl border border-border bg-muted/40 p-3">
+            <p className="text-xs text-muted-foreground">{k}</p>
+            <p className="mt-1 font-semibold text-foreground">{v}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-4 rounded-2xl border border-border bg-muted/30 p-4">
+        <svg viewBox="0 0 320 90" className="h-24 w-full" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="dashfill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="var(--primary)" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M8,68 C40,68 48,52 80,50 C112,48 120,40 152,42 C184,44 192,36 224,38 C256,40 264,30 312,32 L312,88 L8,88 Z"
+            fill="url(#dashfill)"
+          />
+          <path
+            d="M8,68 C40,68 48,52 80,50 C112,48 120,40 152,42 C184,44 192,36 224,38 C256,40 264,30 312,32"
+            fill="none"
+            stroke="var(--primary)"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+          {[
+            [80, 50],
+            [152, 42],
+            [224, 38],
+            [280, 33],
+          ].map(([cx, cy]) => (
+            <circle
+              key={cx}
+              cx={cx}
+              cy={cy}
+              r="3.5"
+              fill="var(--card)"
+              stroke="var(--primary)"
+              strokeWidth="2"
+            />
+          ))}
+        </svg>
+      </div>
+
+      <a
+        href={`https://wa.me/${WHATSAPP}`}
+        className="mt-4 flex items-center justify-between rounded-2xl border border-border bg-secondary px-4 py-3 text-sm font-semibold text-primary transition-colors hover:bg-secondary/70"
+      >
+        <span className="inline-flex items-center gap-2">
+          <span className="text-base">💧</span>
+          Crie sua conta para monitorar em tempo real
+        </span>
+        <span aria-hidden="true">→</span>
+      </a>
     </div>
   );
 }
@@ -48,19 +129,29 @@ function Index() {
           <div className="absolute right-0 top-1/3 h-96 w-96 rounded-full bg-accent/20 blur-3xl" />
         </div>
 
-        <nav className="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
-          <span className="font-display text-xl font-bold tracking-tight">
-            Hidro<span className="text-accent">Flux</span>
-          </span>
-          <a
-            href={`https://wa.me/${WHATSAPP}`}
-            className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105"
-          >
-            Comprar agora
-          </a>
+        <nav className="fixed inset-x-0 top-0 z-50">
+          <div className="mx-auto mt-3 flex w-[min(72rem,calc(100%-1.5rem))] items-center justify-between rounded-full border border-white/20 bg-white/10 px-5 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.18)] backdrop-blur-xl">
+            <span className="font-display text-xl font-semibold tracking-tight text-deep-foreground">
+              Hidro<span className="text-accent">Flux</span>
+            </span>
+            <div className="flex items-center gap-4">
+              <a
+                href="#produto"
+                className="hidden text-sm font-medium text-deep-foreground/80 transition-colors hover:text-deep-foreground sm:inline"
+              >
+                Produto
+              </a>
+              <a
+                href={`https://wa.me/${WHATSAPP}`}
+                className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105"
+              >
+                Comprar agora
+              </a>
+            </div>
+          </div>
         </nav>
 
-        <div className="relative z-10 mx-auto grid w-full max-w-6xl flex-1 items-center gap-10 px-6 py-10 md:grid-cols-2">
+        <div className="relative z-10 mx-auto grid w-full max-w-6xl flex-1 items-center gap-10 px-6 pb-10 pt-28 md:grid-cols-2 md:pt-24">
           <div style={{ transform: `translateY(${scrollY * -0.12}px)` }}>
             <p className="mb-4 inline-block rounded-full bg-deep-foreground/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
               Certificado ABNT NBR 15538
@@ -88,16 +179,13 @@ function Index() {
             </div>
           </div>
 
-          <div className="flex justify-center">
-            <img
-              src={hidrometro}
-              alt="Hidrômetro residencial HidroFlux em latão com visor azul"
-              width={1024}
-              height={1024}
-              className="float-slow w-64 drop-shadow-2xl sm:w-80 md:w-full md:max-w-sm"
-              style={{ transform: `translateY(${scrollY * 0.2}px)` }}
-            />
+          <div
+            className="flex justify-center"
+            style={{ transform: `translateY(${scrollY * 0.14}px)` }}
+          >
+            <DashboardCard />
           </div>
+
         </div>
 
         {/* Wave transition into the body */}
