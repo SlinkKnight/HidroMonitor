@@ -98,16 +98,13 @@ function Index() {
             </div>
           </div>
 
-          <div className="flex justify-center">
-            <img
-              src={hidrometro}
-              alt="Hidrômetro residencial HidroFlux em latão com visor azul"
-              width={1024}
-              height={1024}
-              className="float-slow w-64 drop-shadow-2xl sm:w-80 md:w-full md:max-w-sm"
-              style={{ transform: `translateY(${scrollY * 0.2}px)` }}
-            />
+          <div
+            className="flex justify-center"
+            style={{ transform: `translateY(${scrollY * 0.14}px)` }}
+          >
+            <DashboardCard />
           </div>
+
         </div>
 
         {/* Wave transition into the body */}
