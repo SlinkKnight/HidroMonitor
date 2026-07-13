@@ -84,13 +84,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Hidrômetro residencial classe B, certificado ABNT NBR 15538. Precisão, durabilidade e entrega para todo o Brasil.",
       },
       { name: "author", content: "HidroFlux" },
-      { property: "og:title", content: "HidroFlux — Hidrômetro Residencial" },
+      { property: "og:title", content: "HidroFlux — Hidrômetro Residencial Classe B" },
       {
         property: "og:description",
-        content: "O hidrômetro certificado que mede cada gota com precisão.",
+        content: "Hidrômetro residencial classe B, certificado ABNT NBR 15538. Precisão, durabilidade e entrega para todo o Brasil.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "HidroFlux — Hidrômetro Residencial Classe B" },
+      { name: "twitter:description", content: "Hidrômetro residencial classe B, certificado ABNT NBR 15538. Precisão, durabilidade e entrega para todo o Brasil." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6f4536f1-a637-4087-bdaa-2d03bfed6d47/id-preview-e43a3a50--a9737b47-de92-438e-8b78-a4d4db08aeb6.lovable.app-1783941041100.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6f4536f1-a637-4087-bdaa-2d03bfed6d47/id-preview-e43a3a50--a9737b47-de92-438e-8b78-a4d4db08aeb6.lovable.app-1783941041100.png" },
     ],
     links: [
       {
