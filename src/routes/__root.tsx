@@ -76,22 +76,36 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "HidroFlux — Hidrômetro Residencial Classe B" },
+      {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1, viewport-fit=cover",
+      },
+      { title: "HidroMonitor — Hidrômetro Residencial Classe B" },
       {
         name: "description",
         content:
           "Hidrômetro residencial classe B, certificado ABNT NBR 15538. Precisão, durabilidade e entrega para todo o Brasil.",
       },
-      { name: "author", content: "HidroFlux" },
-      { property: "og:title", content: "HidroFlux — Hidrômetro Residencial Classe B" },
+      { name: "author", content: "HidroMonitor" },
+      // Safari / iOS address & status bar tint
+      { name: "theme-color", content: "#002953" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-title", content: "HidroMonitor" },
+      {
+        name: "apple-mobile-web-app-status-bar-style",
+        content: "black-translucent",
+      },
+      // Open Graph
+      { property: "og:site_name", content: "HidroMonitor" },
+      { property: "og:locale", content: "pt_BR" },
+      { property: "og:title", content: "HidroMonitor — Hidrômetro Residencial Classe B" },
       {
         property: "og:description",
         content: "Hidrômetro residencial classe B, certificado ABNT NBR 15538. Precisão, durabilidade e entrega para todo o Brasil.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "HidroFlux — Hidrômetro Residencial Classe B" },
+      { name: "twitter:title", content: "HidroMonitor — Hidrômetro Residencial Classe B" },
       { name: "twitter:description", content: "Hidrômetro residencial classe B, certificado ABNT NBR 15538. Precisão, durabilidade e entrega para todo o Brasil." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6f4536f1-a637-4087-bdaa-2d03bfed6d47/id-preview-e43a3a50--a9737b47-de92-438e-8b78-a4d4db08aeb6.lovable.app-1783941041100.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6f4536f1-a637-4087-bdaa-2d03bfed6d47/id-preview-e43a3a50--a9737b47-de92-438e-8b78-a4d4db08aeb6.lovable.app-1783941041100.png" },
@@ -101,7 +115,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "icon", href: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { rel: "icon", href: "/favicon-16.png", type: "image/png", sizes: "16x16" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       {
         rel: "preconnect",
@@ -122,7 +139,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>

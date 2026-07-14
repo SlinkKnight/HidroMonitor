@@ -57,8 +57,8 @@
   --border: oklch(0.9 0.02 225);
   --input: oklch(0.9 0.02 225);
   --ring: oklch(0.6 0.15 235);
-  --deep: oklch(0.32 0.08 245);
-  --deep-foreground: oklch(0.97 0.01 220);
+  --deep: oklch(0.28 0.09 250);
+  --deep-foreground: oklch(0.98 0.01 220);
 }
 
 .dark {
@@ -89,8 +89,16 @@
   * {
     border-color: var(--color-border);
   }
+  /* Deep tint on the root so the iOS rubber-band overscroll (top & bottom)
+     and the safe-area render blue instead of white, matching the hero and
+     footer. The page's white surface comes from the app wrapper
+     (`.bg-background` on the page root), so body stays transparent — otherwise
+     a white body background would show through the iOS overscroll bounce. */
+  html {
+    background-color: var(--deep);
+  }
   body {
-    background-color: var(--color-background);
+    background-color: transparent;
     color: var(--color-foreground);
     font-family: var(--font-sans);
   }
@@ -111,6 +119,11 @@
 
 @utility wave-fast {
   animation: wave-move 8s linear infinite;
+}
+
+/* Back layer drifts slower and in reverse for a layered, parallax feel */
+@utility wave-back {
+  animation: wave-move 22s linear infinite reverse;
 }
 
 @keyframes float-y {

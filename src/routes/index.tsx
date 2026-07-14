@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import logo from "../assets/upscalemedia-transformed.png";
 
 
@@ -12,9 +12,23 @@ const INSTAGRAM = "hidroflux";
 
 function Wave({ className = "", flip = false }: { className?: string; flip?: boolean }) {
   return (
-    <div className={className} aria-hidden="true">
+    // overflow-hidden clips the 200%-wide animated svg to this box so it can
+    // never spill outside the viewport and create horizontal scroll.
+    <div className={`overflow-hidden ${className}`} aria-hidden="true">
+      {/* Back layer: lighter + slower, drifts the opposite way for depth */}
       <svg
-        className={`h-full w-[200%] ${flip ? "rotate-180" : ""} wave-slow`}
+        className={`absolute inset-0 h-full w-[200%] opacity-40 ${flip ? "rotate-180" : ""} wave-back`}
+        viewBox="0 0 2880 120"
+        preserveAspectRatio="none"
+      >
+        <path
+          fill="currentColor"
+          d="M0,80 C120,40 360,120 480,80 C600,40 840,120 960,80 C1080,40 1320,120 1440,80 C1560,40 1800,120 1920,80 C2040,40 2280,120 2400,80 C2520,40 2760,120 2880,80 L2880,120 L0,120 Z"
+        />
+      </svg>
+      {/* Front layer */}
+      <svg
+        className={`relative h-full w-[200%] ${flip ? "rotate-180" : ""} wave-slow`}
         viewBox="0 0 2880 120"
         preserveAspectRatio="none"
       >
@@ -109,29 +123,57 @@ function DashboardCard() {
 }
 
 function Index() {
-  const [scrollY, setScrollY] = useState(0);
+  const blurRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
+    // Parallax is a desktop-only nicety. On touch devices the iOS momentum
+    // scroll delivers scroll events in coalesced bursts, so any JS-driven
+    // transform lags the paint and visibly "teleports". Skip it there (and
+    // when the user prefers reduced motion) — the layout is static & clean.
+    const noParallax =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      !window.matchMedia("(pointer: fine)").matches;
+    if (noParallax) return;
+
+    for (const el of [blurRef, textRef, cardRef]) {
+      if (el.current) el.current.style.willChange = "transform";
+    }
+
+    let ticking = false;
+    const apply = () => {
+      // Clamp to >= 0 so iOS rubber-band/overscroll can't invert the offset.
+      const y = Math.max(0, window.scrollY);
+      // Write transforms imperatively — no React re-render, so the update
+      // stays in sync with the scroll paint instead of lagging a frame.
+      if (blurRef.current) blurRef.current.style.transform = `translate3d(0, ${y * 0.35}px, 0)`;
+      if (textRef.current) textRef.current.style.transform = `translate3d(0, ${y * -0.12}px, 0)`;
+      if (cardRef.current) cardRef.current.style.transform = `translate3d(0, ${y * 0.14}px, 0)`;
+      ticking = false;
+    };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(apply);
+    };
+    apply();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen overflow-x-clip bg-background">
       {/* ===== HERO / PARALLAX ===== */}
       <header className="relative flex min-h-[100svh] flex-col overflow-hidden bg-deep text-deep-foreground">
-        {/* Parallax layers */}
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{ transform: `translateY(${scrollY * 0.35}px)` }}
-        >
+        {/* Parallax layers (desktop only — see effect) */}
+        <div ref={blurRef} className="pointer-events-none absolute inset-0">
           <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-primary/25 blur-3xl" />
           <div className="absolute right-0 top-1/3 h-96 w-96 rounded-full bg-accent/20 blur-3xl" />
         </div>
 
         <nav className="fixed inset-x-0 top-0 z-50">
-          <div className="mx-auto mt-3 flex w-[min(72rem,calc(100%-1.5rem))] items-center justify-between rounded-full border border-white/20 bg-white/10 px-5 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.18)] backdrop-blur-xl">
+          <div className="mx-auto mt-3 flex w-[min(72rem,calc(100%-1.5rem))] items-center justify-between rounded-full border border-white/25 bg-white/15 px-5 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.28)] backdrop-blur-xl">
             <a href="/" className="flex items-center gap-2.5 font-display text-xl font-semibold tracking-tight text-deep-foreground">
               <img
                 src={logo}
@@ -140,9 +182,14 @@ function Index() {
                 alt=""
                 aria-hidden="true"
               />
-            <span style={{ fontFamily: "var(--font-sans)" }}>
-              <span style={{ color: "#16309A" }}>Hidro</span>
-              <span style={{ color: "#2B9FE6" }}>Monitor</span>
+            <span
+              style={{
+                fontFamily: "var(--font-sans)",
+                textShadow: "0 1px 8px rgba(0,0,0,0.35)",
+              }}
+            >
+              <span style={{ color: "#5B9BFF" }}>Hidro</span>
+              <span style={{ color: "#5FD0FF" }}>Monitor</span>
             </span>
             </a>
             <div className="flex items-center gap-4">
@@ -162,8 +209,8 @@ function Index() {
           </div>
         </nav>
 
-        <div className="relative z-10 mx-auto grid w-full max-w-6xl flex-1 items-center gap-10 px-6 pb-10 pt-28 md:grid-cols-2 md:pt-24">
-          <div style={{ transform: `translateY(${scrollY * -0.12}px)` }}>
+        <div className="relative z-10 mx-auto grid w-full max-w-6xl flex-1 items-center gap-10 px-6 pb-36 pt-28 md:grid-cols-2 md:pb-40 md:pt-24">
+          <div ref={textRef}>
             <p className="mb-4 inline-block rounded-full bg-deep-foreground/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
               Certificado ABNT NBR 15538
             </p>
@@ -190,17 +237,17 @@ function Index() {
             </div>
           </div>
 
-          <div
-            className="flex justify-center"
-            style={{ transform: `translateY(${scrollY * 0.14}px)` }}
-          >
+          <div ref={cardRef} className="flex justify-center">
             <DashboardCard />
           </div>
 
         </div>
 
-        {/* Wave transition into the body */}
-        <Wave className="absolute bottom-0 left-0 h-24 w-full text-background md:h-32" />
+        {/* Wave transition into the body.
+            -bottom-px overlaps the body by 1px to kill the hairline seam
+            that flickers during scroll; z-0 keeps it below the hero content
+            so the floating dashboard card never crops it. */}
+        <Wave className="absolute -bottom-px left-0 z-0 h-28 w-full text-background md:h-40" />
       </header>
 
       {/* ===== PRODUCT ===== */}
@@ -252,8 +299,8 @@ function Index() {
         </section>
 
         {/* ===== SPECS BAND with wave ===== */}
-        <section className="relative bg-primary text-primary-foreground">
-          <div className="mx-auto max-w-6xl px-6 pb-20 pt-28 md:pb-28 md:pt-36">
+        <section className="relative overflow-hidden bg-primary text-primary-foreground">
+          <div className="mx-auto max-w-6xl px-6 pb-32 pt-28 md:pb-44 md:pt-36">
             <h2 className="text-center text-3xl font-bold md:text-4xl">Ficha técnica</h2>
             <div className="mt-12 grid grid-cols-2 gap-8 text-center md:grid-cols-4">
               {[
@@ -269,7 +316,7 @@ function Index() {
               ))}
             </div>
           </div>
-          <Wave className="absolute bottom-0 left-0 h-16 w-full text-deep md:h-24" />
+          <Wave className="absolute -bottom-px left-0 h-24 w-full text-deep md:h-32" />
         </section>
 
         {/* ===== CTA ===== */}
