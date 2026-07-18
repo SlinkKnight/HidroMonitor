@@ -55,7 +55,7 @@ function SignupPage() {
       footer={
         <>
           Já tem conta?{" "}
-          <Link to="/auth/login" className="font-semibold text-[#5FD0FF] hover:underline">
+          <Link to="/auth/login" className="font-semibold text-[#1E4FA6] hover:underline">
             Entrar
           </Link>
         </>
@@ -74,7 +74,7 @@ function SignupPage() {
         />
 
         <div>
-          <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-deep-foreground/70">
+          <span className="mb-1.5 block text-sm font-semibold text-foreground">
             Senha
           </span>
           <div className="relative">
@@ -86,20 +86,20 @@ function SignupPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Mínimo 6 caracteres"
-              className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 pr-12 text-base text-deep-foreground placeholder:text-deep-foreground/40 outline-none transition-colors focus:border-[#5FD0FF]/60 focus:bg-white/10"
+              className="w-full rounded-lg border border-border bg-background px-4 py-3 pr-12 text-base text-foreground placeholder:text-muted-foreground/60 outline-none transition-colors focus:border-[#1E4FA6]"
             />
             <button
               type="button"
               onClick={() => setShowPw((s) => !s)}
               aria-label={showPw ? "Ocultar senha" : "Mostrar senha"}
-              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg p-2 text-deep-foreground/60 hover:bg-white/10 hover:text-[#5FD0FF]"
+              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-[#1E4FA6]"
             >
               {showPw ? <EyeOff /> : <Eye />}
             </button>
           </div>
         </div>
 
-        <label className="flex items-start gap-3 text-sm text-deep-foreground/80">
+        <label className="flex items-start gap-3 text-sm text-foreground">
           <input
             type="checkbox"
             checked={accept}
@@ -108,7 +108,7 @@ function SignupPage() {
           />
           <span>
             Li e aceito os{" "}
-            <Link to="/terms" className="font-semibold text-[#5FD0FF] hover:underline">
+            <Link to="/terms" className="font-semibold text-[#1E4FA6] hover:underline">
               termos de uso
             </Link>
             .
@@ -116,14 +116,14 @@ function SignupPage() {
         </label>
 
         {error ? (
-          <p className="rounded-lg bg-red-500/15 px-3 py-2 text-sm text-red-200">{error}</p>
+          <p className="rounded-lg bg-red-500/10 px-3 py-2 text-sm text-red-600">{error}</p>
         ) : null}
 
         <AuthButton type="submit" disabled={loading}>
           {loading ? "Enviando código..." : "Criar conta"}
         </AuthButton>
 
-        <p className="text-center text-xs text-deep-foreground/50">
+        <p className="text-center text-xs text-foreground/50">
           Enviaremos um código de confirmação para o seu e-mail.
         </p>
       </form>
