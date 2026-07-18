@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
-import logo from "../assets/upscalemedia-transformed.png";
+import { LogoMark } from "@/components/Logo";
+
 
 
 
@@ -176,22 +177,16 @@ function Index() {
         <nav className="fixed inset-x-0 top-0 z-50">
           <div className="mx-auto mt-3 flex w-[min(72rem,calc(100%-1.5rem))] items-center justify-between rounded-full border border-white/25 bg-white/15 px-5 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.28)] backdrop-blur-xl">
             <a href="/" className="flex items-center gap-2.5 font-display text-xl font-semibold tracking-tight text-deep-foreground">
-              <img
-                src={logo}
-                width="40"
-                height="40"
-                alt=""
-                aria-hidden="true"
-              />
-            <span
-              style={{
-                fontFamily: "var(--font-sans)",
-                textShadow: "0 1px 8px rgba(0,0,0,0.35)",
-              }}
-            >
-              <span style={{ color: "#5B9BFF" }}>Hidro</span>
-              <span style={{ color: "#5FD0FF" }}>Monitor</span>
-            </span>
+              <LogoMark size={36} />
+              <span
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  textShadow: "0 1px 8px rgba(0,0,0,0.35)",
+                }}
+              >
+                <span style={{ color: "#5B9BFF" }}>Hidro</span>
+                <span style={{ color: "#5FD0FF" }}>Monitor</span>
+              </span>
             </a>
             <div className="flex items-center gap-2 sm:gap-4">
               <Link
@@ -202,7 +197,7 @@ function Index() {
               </Link>
               <a
                 href={`https://wa.me/${WHATSAPP}`}
-                className="rounded-full bg-gradient-to-r from-[#5B9BFF] to-[#5FD0FF] px-4 py-2 text-sm font-semibold text-[#001a33] shadow-[0_4px_16px_rgba(95,208,255,0.35)] transition-transform hover:scale-105 sm:px-5"
+                className="rounded-full bg-[#1E4FA6] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1a4494]"
               >
                 Comprar
               </a>
@@ -210,6 +205,7 @@ function Index() {
 
           </div>
         </nav>
+
 
         <div className="relative z-10 mx-auto grid w-full max-w-6xl flex-1 items-center gap-10 px-6 pb-36 pt-28 md:grid-cols-2 md:pb-40 md:pt-24">
           <div ref={textRef}>
