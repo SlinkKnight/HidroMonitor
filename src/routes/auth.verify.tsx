@@ -51,11 +51,17 @@ function VerifyPage() {
     navigate({ to: "/dashboard" });
   }
 
+  // Auto-focus first input on mount.
+  useEffect(() => {
+    inputs.current[0]?.focus();
+  }, []);
+
   // Auto-submit when all 6 digits are filled.
   useEffect(() => {
     if (complete && !loading) verify(code);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [complete]);
+
 
   function setDigit(i: number, v: string) {
     const clean = v.replace(/\D/g, "");
