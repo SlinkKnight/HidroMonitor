@@ -1,6 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import logo from "../assets/upscalemedia-transformed.png";
+
 
 
 export const Route = createFileRoute("/")({
