@@ -193,20 +193,21 @@ function Index() {
               <span style={{ color: "#5FD0FF" }}>Monitor</span>
             </span>
             </a>
-            <div className="flex items-center gap-4">
-              <a
-                href="#produto"
-                className="hidden text-sm font-medium text-deep-foreground/80 transition-colors hover:text-deep-foreground sm:inline"
+            <div className="flex items-center gap-2 sm:gap-4">
+              <Link
+                to="/auth/login"
+                className="text-sm font-semibold text-deep-foreground/90 transition-colors hover:text-[#5FD0FF]"
               >
-                Produto
-              </a>
+                Entrar
+              </Link>
               <a
                 href={`https://wa.me/${WHATSAPP}`}
-                className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105"
+                className="rounded-full bg-gradient-to-r from-[#5B9BFF] to-[#5FD0FF] px-4 py-2 text-sm font-semibold text-[#001a33] shadow-[0_4px_16px_rgba(95,208,255,0.35)] transition-transform hover:scale-105 sm:px-5"
               >
-                Comprar agora
+                Comprar
               </a>
             </div>
+
           </div>
         </nav>
 
