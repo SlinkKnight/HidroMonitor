@@ -4,6 +4,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { AuthShell, AuthInput, AuthButton } from "@/components/AuthShell";
 
 export const Route = createFileRoute("/auth/login")({
+  validateSearch: (s: Record<string, unknown>) => ({
+    next: typeof s.next === "string" && s.next.startsWith("/") && !s.next.startsWith("//") ? s.next : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Entrar — HidroMonitor" },
@@ -16,6 +19,7 @@ export const Route = createFileRoute("/auth/login")({
 
 function LoginPage() {
   const navigate = useNavigate();
+  const { next } = Route.useSearch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false);
@@ -30,6 +34,10 @@ function LoginPage() {
     setLoading(false);
     if (error) {
       setError(error.message === "Invalid login credentials" ? "E-mail ou senha inválidos." : error.message);
+      return;
+    }
+    if (next) {
+      window.location.href = next;
       return;
     }
     navigate({ to: "/dashboard" });
