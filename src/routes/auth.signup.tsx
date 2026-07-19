@@ -86,13 +86,13 @@ function SignupPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Mínimo 6 caracteres"
-              className="w-full rounded-lg border border-border bg-background px-4 py-3 pr-12 text-base text-foreground placeholder:text-muted-foreground/60 outline-none transition-colors focus:border-[#1E4FA6]"
+              className="w-full rounded-lg border border-input bg-white px-4 py-3 pr-12 text-base text-foreground placeholder:text-foreground/40 outline-none transition-colors focus:border-[#5FD0FF]"
             />
             <button
               type="button"
               onClick={() => setShowPw((s) => !s)}
               aria-label={showPw ? "Ocultar senha" : "Mostrar senha"}
-              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-[#1E4FA6]"
+              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg p-2 text-foreground/60 hover:bg-muted hover:text-[#1E4FA6]"
             >
               {showPw ? <EyeOff /> : <Eye />}
             </button>
@@ -104,7 +104,7 @@ function SignupPage() {
             type="checkbox"
             checked={accept}
             onChange={(e) => setAccept(e.target.checked)}
-            className="mt-0.5 h-4 w-4 shrink-0 accent-[#5FD0FF]"
+            className="mt-0.5 h-4 w-4 shrink-0 accent-[#1E4FA6]"
           />
           <span>
             Li e aceito os{" "}

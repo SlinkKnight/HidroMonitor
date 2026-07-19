@@ -26,9 +26,6 @@ function VerifyPage() {
   const [resent, setResent] = useState(false);
   const inputs = useRef<Array<HTMLInputElement | null>>([]);
 
-  const code = digits.join("");
-  const complete = code.length === 6;
-
   async function verify(fullCode: string) {
     if (!email) {
       setError("Sessão de verificação expirada. Refaça o cadastro.");
@@ -58,13 +55,12 @@ function VerifyPage() {
 
   // Auto-submit when all 6 digits are filled.
   useEffect(() => {
-    if (complete && !loading) verify(code);
+    if (digits.join("").length === 6 && !loading) verify(digits.join(""));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [complete]);
-
+  }, [digits.join("")]);
 
   function setDigit(i: number, v: string) {
-    const clean = v.replace(/\D/g, "");
+    const clean = v.replace(/\\D/g, "");
     if (!clean) {
       const next = [...digits];
       next[i] = "";
@@ -109,7 +105,7 @@ function VerifyPage() {
   return (
     <AuthShell
       title="Confirme seu e-mail"
-      subtitle={`Digite o código de 6 dígitos${email ? ` enviado para ${email}` : ""}.`}
+      subtitle={email ? `Digite o código de 6 dígitos${email}` : ""}
       backTo="/auth/signup"
       backLabel="Voltar"
     >
@@ -131,9 +127,11 @@ function VerifyPage() {
                 onFocus={(e) => e.currentTarget.select()}
                 disabled={loading}
                 aria-label={`Dígito ${i + 1}`}
-                className="h-14 w-11 rounded-lg border border-border bg-background text-center text-2xl font-semibold text-foreground outline-none transition-colors focus:border-[#1E4FA6] disabled:opacity-60"
+                className="h-14 w-11 rounded-lg border border-border bg-background text-center text-3xl font-semibold text-foreground outline-none transition-colors focus:border-[#1E4FA6] disabled:opacity-60"
               />
-              {i === 2 ? <span className="mx-1 text-muted-foreground">–</span> : null}
+              {i === 2 ? (
+                <span className="mx-1 text-muted-foreground">–</span>
+              ) : null}
             </div>
           ))}
         </div>
@@ -146,11 +144,10 @@ function VerifyPage() {
             Novo código enviado.
           </p>
         ) : null}
-
         {loading ? (
           <p className="text-center text-sm text-muted-foreground">Verificando...</p>
         ) : (
-          <AuthButton type="button" onClick={() => verify(code)} disabled={!complete}>
+          <AuthButton type="button" onClick={() => verify(digits.join(""))} disabled={!digits.join("").length === 6}>
             Confirmar
           </AuthButton>
         )}

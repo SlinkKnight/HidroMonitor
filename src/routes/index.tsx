@@ -2,9 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { LogoMark } from "@/components/Logo";
 
-
-
-
 export const Route = createFileRoute("/")({
   component: Index,
 });
@@ -14,8 +11,6 @@ const INSTAGRAM = "hidroflux";
 
 function Wave({ className = "", flip = false }: { className?: string; flip?: boolean }) {
   return (
-    // overflow-hidden clips the 200%-wide animated svg to this box so it can
-    // never spill outside the viewport and create horizontal scroll.
     <div className={`overflow-hidden ${className}`} aria-hidden="true">
       {/* Back layer: lighter + slower, drifts the opposite way for depth */}
       <svg
@@ -130,10 +125,6 @@ function Index() {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Parallax is a desktop-only nicety. On touch devices the iOS momentum
-    // scroll delivers scroll events in coalesced bursts, so any JS-driven
-    // transform lags the paint and visibly "teleports". Skip it there (and
-    // when the user prefers reduced motion) — the layout is static & clean.
     const noParallax =
       window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
       !window.matchMedia("(pointer: fine)").matches;
@@ -145,10 +136,7 @@ function Index() {
 
     let ticking = false;
     const apply = () => {
-      // Clamp to >= 0 so iOS rubber-band/overscroll can't invert the offset.
       const y = Math.max(0, window.scrollY);
-      // Write transforms imperatively — no React re-render, so the update
-      // stays in sync with the scroll paint instead of lagging a frame.
       if (blurRef.current) blurRef.current.style.transform = `translate3d(0, ${y * 0.35}px, 0)`;
       if (textRef.current) textRef.current.style.transform = `translate3d(0, ${y * -0.12}px, 0)`;
       if (cardRef.current) cardRef.current.style.transform = `translate3d(0, ${y * 0.14}px, 0)`;
@@ -197,7 +185,7 @@ function Index() {
               </Link>
               <a
                 href={`https://wa.me/${WHATSAPP}`}
-                className="rounded-full bg-[#1E4FA6] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1a4494]"
+                className="hidden sm:inline-flex rounded-full bg-[#1E4FA6] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1a4494]"
               >
                 Comprar
               </a>

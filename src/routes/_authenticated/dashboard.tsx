@@ -21,7 +21,7 @@ function DashboardPage() {
   }
 
   return (
-    <div className="min-h-[100svh] bg-deep text-deep-foreground">
+    <div className="min-h-[100svh] bg-background text-foreground">
       <nav className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5">
         <Link to="/" className="flex items-center gap-2.5">
           <img src={logo} width="36" height="36" alt="HidroMonitor" />
@@ -32,14 +32,14 @@ function DashboardPage() {
         </Link>
         <button
           onClick={signOut}
-          className="text-sm font-semibold text-deep-foreground/80 hover:text-[#5FD0FF]"
+          className="text-sm font-semibold text-foreground/80 hover:text-[#1E4FA6]"
         >
           Sair
         </button>
       </nav>
 
       <main className="mx-auto flex min-h-[calc(100svh-80px)] max-w-2xl flex-col items-center justify-center px-6 py-16 text-center">
-        <div className="mb-8 grid h-28 w-28 place-items-center rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl">
+        <div className="mb-8 grid h-28 w-28 place-items-center rounded-3xl border border-white/10 bg-white p-6 sm:p-8">
           <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="url(#g)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <defs>
               <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
@@ -58,9 +58,9 @@ function DashboardPage() {
         <h1 className="font-display text-4xl font-bold sm:text-5xl">
           Página em construção
         </h1>
-        <p className="mt-4 max-w-md text-deep-foreground/70">
-          Estamos preparando seu painel de monitoramento. Em breve você verá o consumo do seu
-          hidrômetro em tempo real por aqui.
+        <p className="mt-4 max-w-md text-foreground/70">
+          Estamos preparando seu painel de monitoramento. Em breve vocês verá o consumo do seu
+          hidrómetro em tempo real por aqui.
         </p>
 
         <Link
