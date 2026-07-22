@@ -12,9 +12,15 @@ dist
 dist-ssr
 .output
 .vinxi
+.vite
 .tanstack/**
 .nitro
 *.local
+
+# Local environment variables (Supabase keys, etc.) — never commit
+.env
+.env.*
+!.env.example
 
 # Wrangler / Cloudflare
 .wrangler/

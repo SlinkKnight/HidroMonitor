@@ -12,9 +12,15 @@ type OAuthDetails = {
 };
 type OAuthResult = { redirect_url?: string; redirect_to?: string };
 type OAuthNs = {
-  getAuthorizationDetails: (id: string) => Promise<{ data: OAuthDetails | null; error: { message: string } | null }>;
-  approveAuthorization: (id: string) => Promise<{ data: OAuthResult | null; error: { message: string } | null }>;
-  denyAuthorization: (id: string) => Promise<{ data: OAuthResult | null; error: { message: string } | null }>;
+  getAuthorizationDetails: (
+    id: string,
+  ) => Promise<{ data: OAuthDetails | null; error: { message: string } | null }>;
+  approveAuthorization: (
+    id: string,
+  ) => Promise<{ data: OAuthResult | null; error: { message: string } | null }>;
+  denyAuthorization: (
+    id: string,
+  ) => Promise<{ data: OAuthResult | null; error: { message: string } | null }>;
 };
 const oauth = () => (supabase.auth as unknown as { oauth: OAuthNs }).oauth;
 
