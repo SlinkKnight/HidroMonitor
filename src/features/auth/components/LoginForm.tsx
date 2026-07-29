@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import { FEATURES } from "@/config/features";
 import { AuthShell } from "./AuthShell";
 import { AuthInput } from "./AuthInput";
 import { AuthButton } from "./AuthButton";
@@ -12,20 +13,25 @@ export function LoginForm({ next }: { next?: string }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Login desativado (FEATURES.auth = false): "Entrar" vai direto ao dashboard,
+  // sem checar credenciais. Reative em src/config/features.ts.
+  const authDisabled = !FEATURES.auth;
+
+  function goToDashboard() {
+    if (next) {
+      window.location.href = next;
+      return;
+    }
+    navigate({ to: "/dashboard" });
+  }
+
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    login.mutate(
-      { email, password },
-      {
-        onSuccess: () => {
-          if (next) {
-            window.location.href = next;
-            return;
-          }
-          navigate({ to: "/dashboard" });
-        },
-      },
-    );
+    if (authDisabled) {
+      goToDashboard();
+      return;
+    }
+    login.mutate({ email, password }, { onSuccess: goToDashboard });
   }
 
   return (
@@ -47,7 +53,7 @@ export function LoginForm({ next }: { next?: string }) {
           type="email"
           autoComplete="email"
           inputMode="email"
-          required
+          required={!authDisabled}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="voce@email.com"
@@ -58,16 +64,17 @@ export function LoginForm({ next }: { next?: string }) {
           onChange={(e) => setPassword(e.target.value)}
           autoComplete="current-password"
           placeholder="••••••••"
+          required={!authDisabled}
         />
 
-        {login.error ? (
+        {!authDisabled && login.error ? (
           <p className="rounded-lg bg-red-500/10 px-3 py-2 text-sm text-red-600">
             {login.error.message}
           </p>
         ) : null}
 
-        <AuthButton type="submit" disabled={login.isPending}>
-          {login.isPending ? "Entrando..." : "Entrar"}
+        <AuthButton type="submit" disabled={!authDisabled && login.isPending}>
+          {!authDisabled && login.isPending ? "Entrando..." : "Entrar"}
         </AuthButton>
       </form>
     </AuthShell>

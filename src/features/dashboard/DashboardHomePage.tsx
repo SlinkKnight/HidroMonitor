@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { DashboardSidebar } from "./components/DashboardSidebar";
+import { DashboardShell } from "./components/DashboardShell";
 import { LiveBadge } from "./components/LiveBadge";
 import { SensorStatusBanner } from "./components/SensorStatusBanner";
 import { MetricCard } from "./components/MetricCard";
@@ -92,13 +92,9 @@ export function DashboardHomePage() {
   }
 
   return (
-    <div className="flex min-h-[100svh] bg-background text-foreground">
-      <div className="sticky top-0 hidden h-[100svh] w-64 shrink-0 md:block">
-        <DashboardSidebar active="overview" onAddDevice={() => setAddOpen(true)} />
-      </div>
-
-      <main className="min-w-0 flex-1 px-5 py-6 md:px-8 md:py-8">
-        <div className="mx-auto max-w-6xl">
+    <>
+      <DashboardShell active="overview" onAddDevice={() => setAddOpen(true)}>
+        <div>
           {/* Header */}
           <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
             <div>
@@ -218,7 +214,7 @@ export function DashboardHomePage() {
             </>
           )}
         </div>
-      </main>
+      </DashboardShell>
 
       <Modal open={addOpen} onClose={() => setAddOpen(false)} title="Adicionar condomínio">
         <CondominioForm showBlocos onSubmit={handleAddCondominio} submitLabel="Criar condomínio" />
@@ -245,6 +241,6 @@ export function DashboardHomePage() {
         onConfirm={handleConfirmRemove}
         onCancel={() => setRemovingCondominio(null)}
       />
-    </div>
+    </>
   );
 }

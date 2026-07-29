@@ -14,7 +14,7 @@ export function CondominioCard({
   onRemove: () => void;
 }) {
   return (
-    <div className="flex items-center justify-between gap-3 rounded-2xl border border-border bg-card p-5">
+    <div className="flex min-w-0 items-center justify-between gap-3 rounded-2xl border border-border bg-card p-5">
       <Link
         to="/dashboard/condominios/$condominioId"
         params={{ condominioId: condominio.id }}

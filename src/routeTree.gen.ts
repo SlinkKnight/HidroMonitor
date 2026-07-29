@@ -18,6 +18,8 @@ import { Route as AuthSignupRouteImport } from './routes/auth.signup'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard/index'
+import { Route as AuthenticatedDashboardConfiguracoesRouteImport } from './routes/_authenticated/dashboard/configuracoes'
+import { Route as AuthenticatedDashboardAlertasRouteImport } from './routes/_authenticated/dashboard/alertas'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as AuthenticatedDashboardCondominiosCondominioIdIndexRouteImport } from './routes/_authenticated/dashboard/condominios/$condominioId/index'
 import { Route as AuthenticatedDashboardCondominiosCondominioIdDispositivosDeviceIdRouteImport } from './routes/_authenticated/dashboard/condominios/$condominioId/dispositivos/$deviceId'
@@ -68,6 +70,18 @@ const AuthenticatedDashboardIndexRoute =
     path: '/dashboard/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedDashboardConfiguracoesRoute =
+  AuthenticatedDashboardConfiguracoesRouteImport.update({
+    id: '/dashboard/configuracoes',
+    path: '/dashboard/configuracoes',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardAlertasRoute =
+  AuthenticatedDashboardAlertasRouteImport.update({
+    id: '/dashboard/alertas',
+    path: '/dashboard/alertas',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
   id: '/.lovable/oauth/consent',
   path: '/.lovable/oauth/consent',
@@ -97,6 +111,8 @@ export interface FileRoutesByFullPath {
   '/auth/signup': typeof AuthSignupRoute
   '/auth/verify': typeof AuthVerifyRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/dashboard/alertas': typeof AuthenticatedDashboardAlertasRoute
+  '/dashboard/configuracoes': typeof AuthenticatedDashboardConfiguracoesRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/dashboard/condominios/$condominioId/': typeof AuthenticatedDashboardCondominiosCondominioIdIndexRoute
   '/dashboard/condominios/$condominioId/dispositivos/$deviceId': typeof AuthenticatedDashboardCondominiosCondominioIdDispositivosDeviceIdRoute
@@ -110,6 +126,8 @@ export interface FileRoutesByTo {
   '/auth/signup': typeof AuthSignupRoute
   '/auth/verify': typeof AuthVerifyRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/dashboard/alertas': typeof AuthenticatedDashboardAlertasRoute
+  '/dashboard/configuracoes': typeof AuthenticatedDashboardConfiguracoesRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/dashboard/condominios/$condominioId': typeof AuthenticatedDashboardCondominiosCondominioIdIndexRoute
   '/dashboard/condominios/$condominioId/dispositivos/$deviceId': typeof AuthenticatedDashboardCondominiosCondominioIdDispositivosDeviceIdRoute
@@ -125,6 +143,8 @@ export interface FileRoutesById {
   '/auth/signup': typeof AuthSignupRoute
   '/auth/verify': typeof AuthVerifyRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/_authenticated/dashboard/alertas': typeof AuthenticatedDashboardAlertasRoute
+  '/_authenticated/dashboard/configuracoes': typeof AuthenticatedDashboardConfiguracoesRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/_authenticated/dashboard/condominios/$condominioId/': typeof AuthenticatedDashboardCondominiosCondominioIdIndexRoute
   '/_authenticated/dashboard/condominios/$condominioId/dispositivos/$deviceId': typeof AuthenticatedDashboardCondominiosCondominioIdDispositivosDeviceIdRoute
@@ -140,6 +160,8 @@ export interface FileRouteTypes {
     | '/auth/signup'
     | '/auth/verify'
     | '/.lovable/oauth/consent'
+    | '/dashboard/alertas'
+    | '/dashboard/configuracoes'
     | '/dashboard/'
     | '/dashboard/condominios/$condominioId/'
     | '/dashboard/condominios/$condominioId/dispositivos/$deviceId'
@@ -153,6 +175,8 @@ export interface FileRouteTypes {
     | '/auth/signup'
     | '/auth/verify'
     | '/.lovable/oauth/consent'
+    | '/dashboard/alertas'
+    | '/dashboard/configuracoes'
     | '/dashboard'
     | '/dashboard/condominios/$condominioId'
     | '/dashboard/condominios/$condominioId/dispositivos/$deviceId'
@@ -167,6 +191,8 @@ export interface FileRouteTypes {
     | '/auth/signup'
     | '/auth/verify'
     | '/.lovable/oauth/consent'
+    | '/_authenticated/dashboard/alertas'
+    | '/_authenticated/dashboard/configuracoes'
     | '/_authenticated/dashboard/'
     | '/_authenticated/dashboard/condominios/$condominioId/'
     | '/_authenticated/dashboard/condominios/$condominioId/dispositivos/$deviceId'
@@ -249,6 +275,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/dashboard/configuracoes': {
+      id: '/_authenticated/dashboard/configuracoes'
+      path: '/dashboard/configuracoes'
+      fullPath: '/dashboard/configuracoes'
+      preLoaderRoute: typeof AuthenticatedDashboardConfiguracoesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/alertas': {
+      id: '/_authenticated/dashboard/alertas'
+      path: '/dashboard/alertas'
+      fullPath: '/dashboard/alertas'
+      preLoaderRoute: typeof AuthenticatedDashboardAlertasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/.lovable/oauth/consent': {
       id: '/.lovable/oauth/consent'
       path: '/.lovable/oauth/consent'
@@ -274,12 +314,17 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardAlertasRoute: typeof AuthenticatedDashboardAlertasRoute
+  AuthenticatedDashboardConfiguracoesRoute: typeof AuthenticatedDashboardConfiguracoesRoute
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
   AuthenticatedDashboardCondominiosCondominioIdIndexRoute: typeof AuthenticatedDashboardCondominiosCondominioIdIndexRoute
   AuthenticatedDashboardCondominiosCondominioIdDispositivosDeviceIdRoute: typeof AuthenticatedDashboardCondominiosCondominioIdDispositivosDeviceIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardAlertasRoute: AuthenticatedDashboardAlertasRoute,
+  AuthenticatedDashboardConfiguracoesRoute:
+    AuthenticatedDashboardConfiguracoesRoute,
   AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
   AuthenticatedDashboardCondominiosCondominioIdIndexRoute:
     AuthenticatedDashboardCondominiosCondominioIdIndexRoute,
