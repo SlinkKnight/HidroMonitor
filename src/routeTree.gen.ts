@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as SugestaoRouteImport } from './routes/sugestao'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -27,6 +28,11 @@ import { Route as AuthenticatedDashboardCondominiosCondominioIdDispositivosDevic
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SugestaoRoute = SugestaoRouteImport.update({
+  id: '/sugestao',
+  path: '/sugestao',
   getParentRoute: () => rootRouteImport,
 } as any)
 const McpRoute = McpRouteImport.update({
@@ -105,6 +111,7 @@ const AuthenticatedDashboardCondominiosCondominioIdDispositivosDeviceIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/mcp': typeof McpRoute
+  '/sugestao': typeof SugestaoRoute
   '/terms': typeof TermsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/auth/login': typeof AuthLoginRoute
@@ -120,6 +127,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/mcp': typeof McpRoute
+  '/sugestao': typeof SugestaoRoute
   '/terms': typeof TermsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/auth/login': typeof AuthLoginRoute
@@ -137,6 +145,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/mcp': typeof McpRoute
+  '/sugestao': typeof SugestaoRoute
   '/terms': typeof TermsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/auth/login': typeof AuthLoginRoute
@@ -154,6 +163,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/mcp'
+    | '/sugestao'
     | '/terms'
     | '/.well-known/oauth-protected-resource'
     | '/auth/login'
@@ -169,6 +179,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/mcp'
+    | '/sugestao'
     | '/terms'
     | '/.well-known/oauth-protected-resource'
     | '/auth/login'
@@ -185,6 +196,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/mcp'
+    | '/sugestao'
     | '/terms'
     | '/.well-known/oauth-protected-resource'
     | '/auth/login'
@@ -202,6 +214,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   McpRoute: typeof McpRoute
+  SugestaoRoute: typeof SugestaoRoute
   TermsRoute: typeof TermsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AuthLoginRoute: typeof AuthLoginRoute
@@ -217,6 +230,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sugestao': {
+      id: '/sugestao'
+      path: '/sugestao'
+      fullPath: '/sugestao'
+      preLoaderRoute: typeof SugestaoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mcp': {
@@ -339,6 +359,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   McpRoute: McpRoute,
+  SugestaoRoute: SugestaoRoute,
   TermsRoute: TermsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
