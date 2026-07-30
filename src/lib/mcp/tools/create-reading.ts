@@ -11,18 +11,20 @@ export function registerCreateReadingTool(server: McpServer, auth: McpAuthContex
       title: "Record a water meter reading",
       description:
         "Insert a new water meter reading for the signed-in user. `liters` must be zero or positive. `read_at` is optional; defaults to now.",
-      inputSchema: {
+      inputSchema: z.object({
         liters: z.number().describe("Meter reading in liters. Must be >= 0."),
         read_at: z
           .string()
+          .datetime()
+          .optional()
           .describe(
             "ISO 8601 timestamp for when the reading was taken. Defaults to the current server time when omitted.",
-          )
-          .optional(),
-      },
+          ),
+      }).describe("create_reading input") as any,
       annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
     },
-    async ({ liters, read_at }) => {
+    async (args: { liters: number; read_at?: string }) => {
+      const { liters, read_at } = args;
       if (liters < 0) {
         return { content: [{ type: "text", text: "liters must be >= 0" }], isError: true };
       }
