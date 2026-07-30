@@ -23,7 +23,7 @@ export function registerCreateReadingTool(server: McpServer, auth: McpAuthContex
       }).describe("create_reading input") as any,
       annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
     },
-    async (args: { liters: number; read_at?: string }) => {
+    async (args: any) => {
       const { liters, read_at } = args;
       if (liters < 0) {
         return { content: [{ type: "text", text: "liters must be >= 0" }], isError: true };

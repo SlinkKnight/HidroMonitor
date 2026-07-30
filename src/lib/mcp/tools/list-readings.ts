@@ -10,18 +10,19 @@ export function registerListReadingsTool(server: McpServer, auth: McpAuthContext
       title: "List water meter readings",
       description:
         "List the signed-in user's water meter readings, most recent first. Each reading has a liters value and a read_at timestamp.",
-      inputSchema: {
+      inputSchema: z.object({
         limit: z
           .number()
           .int()
+          .optional()
           .describe(
             "Maximum number of readings to return. Defaults to 20 when omitted; the server caps at 100.",
-          )
-          .optional(),
-      },
+          ),
+      }).describe("list_readings input") as any,
       annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
     },
-    async ({ limit }) => {
+    async (args: any) => {
+      const limit = args?.limit;
       const capped = Math.min(Math.max(limit ?? 20, 1), 100);
       const { data, error } = await supabaseForToken(auth.token)
         .from("readings")
