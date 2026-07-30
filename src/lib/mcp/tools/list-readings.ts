@@ -1,10 +1,11 @@
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { supabaseForToken } from "../supabase-for-user";
 import type { McpAuthContext } from "../verify-bearer-token";
 
 export function registerListReadingsTool(server: McpServer, auth: McpAuthContext) {
-  server.registerTool(
+  (server.registerTool as any)(
     "list_readings",
     {
       title: "List water meter readings",
@@ -18,7 +19,7 @@ export function registerListReadingsTool(server: McpServer, auth: McpAuthContext
           .describe(
             "Maximum number of readings to return. Defaults to 20 when omitted; the server caps at 100.",
           ),
-      }).describe("list_readings input") as any,
+      }),
       annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
     },
     async (args: any) => {
@@ -29,11 +30,11 @@ export function registerListReadingsTool(server: McpServer, auth: McpAuthContext
         .select("id, liters, read_at, created_at")
         .order("read_at", { ascending: false })
         .limit(capped);
-      if (error) return { content: [{ type: "text", text: error.message }], isError: true };
+      if (error) return { content: [{ type: "text", text: error.message }], isError: true } as CallToolResult;
       return {
         content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
         structuredContent: { readings: data ?? [] },
-      };
+      } as CallToolResult;
     },
   );
 }
