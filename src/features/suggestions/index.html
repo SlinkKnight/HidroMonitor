@@ -51,6 +51,7 @@
     min-height: 100vh;
     min-height: 100dvh;
     width: 100%;
+    padding-top: 90px;
     overflow-x: hidden;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -68,49 +69,62 @@
       max(22px, env(safe-area-inset-left));
   }
 
-  /* ---------- navbar em pílula ---------- */
+  /* ---------- navbar igual à landing page ---------- */
   .nav {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 14px;
-    /* liquid glass: vidro claro, desfoque forte e brilho na borda superior */
-    background: linear-gradient(180deg, rgba(255,255,255,.30) 0%, rgba(255,255,255,.14) 100%);
-    border: 1px solid rgba(255,255,255,.35);
-    border-radius: 44px;
-    padding: 11px 16px 11px 15px;
-    margin: 8px 0 54px;
-    -webkit-backdrop-filter: blur(22px) saturate(180%);
-    backdrop-filter: blur(22px) saturate(180%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.55),
-      inset 0 -1px 0 rgba(255,255,255,.10),
-      0 10px 30px rgba(2, 10, 22, .3);
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
   }
-  .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
-  .brand .name { white-space: nowrap; }
+  .nav-inner {
+    pointer-events: auto;
+    width: min(72rem, calc(100% - 1.5rem));
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 9999px;
+    background: rgba(255,255,255,.15);
+    padding: 12px 20px;
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    box-shadow: 0 8px 32px rgba(0,0,0,.28);
+  }
+  .brand { display: flex; align-items: center; gap: 10px; min-width: 0; text-decoration: none; }
   .brand .mark {
-    width: 32px; height: 32px; flex: none;
+    width: 36px; height: 36px; flex: none;
     display: grid; place-items: center;
   }
-  .brand .mark img {
-    width: 100%; height: 100%;
-    object-fit: contain;
-  }
-  /* cores originais da logo: "Hidro" azul-marinho, "Monitor" azul */
   .brand .name {
-    font-size: 19px; font-weight: 700; letter-spacing: -.3px;
-    color: #002f82;
+    font-size: 1.25rem; font-weight: 600; letter-spacing: -0.025em;
+    white-space: nowrap; color: #f4f9ff;
+    text-shadow: 0 1px 8px rgba(0,0,0,.35);
   }
-  .brand .name span { color: #0086ea; }
-  .nav .tag {
-    display: inline-flex; align-items: center; gap: 8px; flex: none;
-    font-size: 12.5px; font-weight: 600; color: #123a63;
-    background: rgba(255,255,255,.35);
-    border: 1px solid rgba(255,255,255,.5);
-    padding: 8px 15px; border-radius: 40px; white-space: nowrap;
+  .brand .name .hidro { color: #5B9BFF; }
+  .brand .name .monitor { color: #5FD0FF; }
+  .nav-actions {
+    display: flex; align-items: center; gap: 6px;
   }
-  .nav .tag .dot {
-    width: 7px; height: 7px; border-radius: 50%; background: var(--teal-d);
-    box-shadow: 0 0 0 3px rgba(16,168,163,.22);
+  .nav-actions .login {
+    font-size: 0.875rem; font-weight: 600; color: rgba(244,249,255,.9);
+    text-decoration: none; padding: 8px 12px; border-radius: 999px;
+    transition: color .15s;
+  }
+  .nav-actions .login:hover { color: #5FD0FF; }
+  .nav-actions .buy {
+    display: none;
+    font-size: 0.875rem; font-weight: 600; color: #fff;
+    text-decoration: none; background: #1E4FA6;
+    padding: 9px 20px; border-radius: 999px;
+    transition: background .15s;
+  }
+  .nav-actions .buy:hover { background: #1a4494; }
+  @media (min-width: 640px) {
+    .nav-actions .buy { display: inline-flex; }
   }
 
   /* ---------- hero: duas colunas ---------- */
@@ -280,15 +294,28 @@
 <body>
   <div class="wrap">
 
-    <!-- navbar -->
+    <!-- navbar igual à landing page -->
     <div class="nav">
-      <div class="brand">
-        <span class="mark">
-          <img src="/sugestao/logo-simbolo.png" alt="HidroMonitor" />
-        </span>
-        <span class="name">Hidro<span>Monitor</span></span>
+      <div class="nav-inner">
+        <a class="brand" href="/">
+          <span class="mark">
+            <svg viewBox="0 0 40 40" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M20 4C14 10 7 18 7 25c0 7 5.8 12 13 12s13-5 13-12c0-7-7-15-13-21Z" fill="url(#drop)"/>
+              <defs>
+                <linearGradient id="drop" x1="20" y1="4" x2="20" y2="37" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#5FD0FF"/>
+                  <stop offset="1" stop-color="#2F74E0"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
+          <span class="name"><span class="hidro">Hidro</span><span class="monitor">Monitor</span></span>
+        </a>
+        <div class="nav-actions">
+          <a class="login" href="/auth/login">Entrar</a>
+          <a class="buy" href="/">Comprar</a>
+        </div>
       </div>
-      <span class="tag"><span class="dot"></span> Taquara Summit</span>
     </div>
 
     <!-- hero -->
@@ -313,7 +340,6 @@
       <div class="card">
         <div class="card-top">
           <h2>Enviar mensagem</h2>
-          <span class="pill"><span class="dot"></span> resposta rápida</span>
         </div>
 
         <form id="form" novalidate>
