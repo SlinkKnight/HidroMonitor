@@ -32,7 +32,7 @@ export function Nav() {
             href={WHATSAPP_URL}
             className="hidden sm:inline-flex rounded-full bg-[#1E4FA6] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1a4494]"
           >
-            Comprar
+            Contato
           </a>
         </div>
       </div>

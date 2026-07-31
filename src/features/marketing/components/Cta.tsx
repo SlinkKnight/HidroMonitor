@@ -12,7 +12,7 @@ export function Cta() {
           href={WHATSAPP_URL}
           className="mt-8 inline-block rounded-full bg-accent px-8 py-3 font-semibold text-accent-foreground transition-transform hover:scale-105"
         >
-          Comprar pelo WhatsApp
+          Entre em contato pelo WhatsApp
         </a>
       </div>
     </section>
