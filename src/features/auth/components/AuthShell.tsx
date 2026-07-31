@@ -30,7 +30,7 @@ export function AuthShell({
       <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-md flex-col px-6 py-8">
         <Link
           to={backTo}
-          className="inline-flex items-center gap-1.5 self-start text-sm font-medium text-deep-foreground transition-colors hover:text-white"
+          className="inline-flex items-center gap-1.5 self-start text-sm font-medium text-deep-foreground"
         >
           <ArrowLeftIcon />
           {backLabel}
