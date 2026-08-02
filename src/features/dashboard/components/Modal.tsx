@@ -14,15 +14,49 @@ export function Modal({
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
 
-  // Enquanto aberto: fecha no Escape, trava o scroll do fundo, move o foco para
-  // o painel e devolve ao elemento que abriu o modal ao fechar.
+  // Enquanto aberto: fecha no Escape, prende o Tab dentro do painel, trava o
+  // scroll do fundo, move o foco para o painel e devolve ao elemento que abriu
+  // o modal ao fechar.
   useEffect(() => {
     if (!open) return;
 
     const previouslyFocused = document.activeElement as HTMLElement | null;
     const previousOverflow = document.body.style.overflow;
+
+    const focusableInPanel = () =>
+      Array.from(
+        panelRef.current?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ) ?? [],
+      ).filter((el) => el.offsetParent !== null);
+
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const focusable = focusableInPanel();
+      if (focusable.length === 0) {
+        // Nada focável dentro: mantém o foco no próprio painel.
+        e.preventDefault();
+        panelRef.current?.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      // Circula dentro do diálogo em vez de vazar para a página atrás.
+      if (e.shiftKey && (active === first || active === panelRef.current)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
 
     document.addEventListener("keydown", onKeyDown);
