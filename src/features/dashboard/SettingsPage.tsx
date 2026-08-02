@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DashboardShell } from "./components/DashboardShell";
+import { useSettings } from "./hooks/useSettings";
 
 function SettingCard({
   title,
@@ -51,14 +52,15 @@ function Toggle({
 }
 
 export function SettingsPage() {
-  const [tarifa, setTarifa] = useState("0,012");
-  const [limite, setLimite] = useState("500");
-  const [notifEmail, setNotifEmail] = useState(true);
-  const [notifPush, setNotifPush] = useState(false);
+  const { settings, save } = useSettings();
+  const [tarifa, setTarifa] = useState(settings.tarifa);
+  const [limite, setLimite] = useState(settings.limite);
+  const [notifEmail, setNotifEmail] = useState(settings.notifEmail);
+  const [notifPush, setNotifPush] = useState(settings.notifPush);
   const [saved, setSaved] = useState(false);
 
   function handleSave() {
-    // Persistência real entra aqui quando o backend estiver ligado.
+    save({ tarifa, limite, notifEmail, notifPush });
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   }

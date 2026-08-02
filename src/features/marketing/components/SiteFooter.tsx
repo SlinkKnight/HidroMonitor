@@ -7,7 +7,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-10 border-t border-deep-foreground/10 px-6 py-14 md:grid-cols-3">
         <div>
           <span className="font-display text-xl font-bold">
-            Hidro<span className="text-accent">Flux</span>
+            Hidro<span className="text-accent">Monitor</span>
           </span>
           <p className="mt-3 max-w-xs text-sm text-deep-foreground/60">
             Hidrômetros residenciais certificados. Um produto, feito com cuidado.
@@ -48,7 +48,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-deep-foreground/10 py-6 text-center text-xs text-deep-foreground/40">
-        © {new Date().getFullYear()} HidroFlux. Todos os direitos reservados.
+        © {new Date().getFullYear()} HidroMonitor. Todos os direitos reservados.
       </div>
     </footer>
   );

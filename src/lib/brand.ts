@@ -1,5 +1,5 @@
 export const WHATSAPP_NUMBER = "5511999998888";
-export const INSTAGRAM_HANDLE = "hidroflux";
+export const INSTAGRAM_HANDLE = "hidromonitor";
 
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 export const INSTAGRAM_URL = `https://instagram.com/${INSTAGRAM_HANDLE}`;

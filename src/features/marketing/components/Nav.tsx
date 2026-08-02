@@ -6,8 +6,8 @@ export function Nav() {
   return (
     <nav className="fixed inset-x-0 top-0 z-50">
       <div className="mx-auto mt-3 flex w-[min(72rem,calc(100%-1.5rem))] items-center justify-between rounded-full border border-white/25 bg-white/15 px-5 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.28)] backdrop-blur-xl">
-        <a
-          href="/"
+        <Link
+          to="/"
           className="flex items-center gap-2.5 font-display text-xl font-semibold tracking-tight text-deep-foreground"
         >
           <LogoMark size={36} />
@@ -20,14 +20,11 @@ export function Nav() {
             <span style={{ color: BRAND_COLORS.hidroOnDark }}>Hidro</span>
             <span style={{ color: BRAND_COLORS.monitor }}>Monitor</span>
           </span>
-        </a>
+        </Link>
         <div className="flex items-center gap-2 sm:gap-4">
-          <Link
-            to="/auth/login"
-            className="text-sm font-semibold text-deep-foreground/90 transition-colors hover:text-[#5FD0FF]"
-          >
-            Entrar
-          </Link>
+          {/* TEMPORÁRIO: link "Entrar" removido da landing a pedido. Para restaurar:
+              <Link to="/auth/login" className="text-sm font-semibold text-deep-foreground/90 transition-colors hover:text-[#5FD0FF]">Entrar</Link>
+              A rota /auth/login segue ativa e acessível por URL direta. */}
           <a
             href={WHATSAPP_URL}
             className="hidden sm:inline-flex rounded-full bg-[#1E4FA6] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1a4494]"
