@@ -1,4 +1,6 @@
-export const WHATSAPP_NUMBER = "5511999998888";
+export const WHATSAPP_NUMBER = "5554992681225";
+/** Same number as WHATSAPP_NUMBER, formatted for display to the reader. */
+export const WHATSAPP_DISPLAY = "+55 54 99268-1225";
 export const INSTAGRAM_HANDLE = "hidromonitor";
 
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;

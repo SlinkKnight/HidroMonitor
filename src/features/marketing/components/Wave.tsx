@@ -1,9 +1,18 @@
+/**
+ * `flip` mirrors the wave vertically, moving the fill to the top of the box so
+ * the wave can introduce a section instead of closing one.
+ *
+ * It must stay a Y-only mirror: `rotate-180` would also mirror X, and since the
+ * CSS `rotate` property is applied after the `transform` that drives the
+ * scrolling keyframes, it would reverse the drift and slide the (2x-wide) svg
+ * clear out of the container. `scale` only inverts Y, so the drift is untouched.
+ */
 export function Wave({ className = "", flip = false }: { className?: string; flip?: boolean }) {
   return (
     <div className={`overflow-hidden ${className}`} aria-hidden="true">
       {/* Back layer: lighter + slower, drifts the opposite way for depth */}
       <svg
-        className={`absolute inset-0 h-full w-[200%] opacity-40 ${flip ? "rotate-180" : ""} wave-back`}
+        className={`absolute inset-0 h-full w-[200%] opacity-40 ${flip ? "-scale-y-100" : ""} wave-back`}
         viewBox="0 0 2880 120"
         preserveAspectRatio="none"
       >
@@ -14,7 +23,7 @@ export function Wave({ className = "", flip = false }: { className?: string; fli
       </svg>
       {/* Front layer */}
       <svg
-        className={`relative h-full w-[200%] ${flip ? "rotate-180" : ""} wave-slow`}
+        className={`relative h-full w-[200%] ${flip ? "-scale-y-100" : ""} wave-slow`}
         viewBox="0 0 2880 120"
         preserveAspectRatio="none"
       >

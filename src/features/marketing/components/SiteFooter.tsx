@@ -1,5 +1,5 @@
 import { WhatsAppIcon, InstagramIcon } from "@/components/icons";
-import { INSTAGRAM_HANDLE, INSTAGRAM_URL, WHATSAPP_URL } from "@/lib/brand";
+import { INSTAGRAM_HANDLE, INSTAGRAM_URL, WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/brand";
 
 export function SiteFooter() {
   return (
@@ -10,7 +10,8 @@ export function SiteFooter() {
             Hidro<span className="text-accent">Monitor</span>
           </span>
           <p className="mt-3 max-w-xs text-sm text-deep-foreground/60">
-            Hidrômetros residenciais certificados. Um produto, feito com cuidado.
+            Gestão inteligente de água para condomínios, aproveitando a estrutura que o prédio já
+            tem.
           </p>
         </div>
 
@@ -25,7 +26,7 @@ export function SiteFooter() {
                 className="inline-flex items-center gap-2 transition-colors hover:text-accent"
               >
                 <WhatsAppIcon />
-                WhatsApp: +55 11 99999-8888
+                WhatsApp: {WHATSAPP_DISPLAY}
               </a>
             </li>
             <li>
@@ -44,7 +45,9 @@ export function SiteFooter() {
             Atendimento
           </h3>
           <p className="mt-4 text-sm text-deep-foreground/60">Seg a Sex, 8h às 18h</p>
-          <p className="mt-1 text-sm text-deep-foreground/60">Entrega para todo o Brasil</p>
+          <p className="mt-1 text-sm text-deep-foreground/60">
+            Atendemos condomínios em todo o Brasil
+          </p>
         </div>
       </div>
       <div className="border-t border-deep-foreground/10 py-6 text-center text-xs text-deep-foreground/40">

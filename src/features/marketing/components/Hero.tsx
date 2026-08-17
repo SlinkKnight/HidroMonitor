@@ -20,27 +20,28 @@ export function Hero() {
       <div className="relative z-10 mx-auto grid w-full max-w-6xl flex-1 items-center gap-10 px-6 pb-36 pt-28 md:grid-cols-2 md:pb-40 md:pt-24">
         <div ref={textRef}>
           <p className="mb-4 inline-block rounded-full bg-deep-foreground/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
-            Certificado ABNT NBR 15538
+            Para síndicos e administradoras
           </p>
           <h1 className="text-4xl font-extrabold leading-[1.05] sm:text-5xl md:text-6xl">
-            Cada gota medida com precisão.
+            Gestão inteligente da água, com a estrutura que seu condomínio já tem.
           </h1>
           <p className="mt-5 max-w-md text-base text-deep-foreground/70">
-            O hidrômetro residencial que junta durabilidade em latão, leitura cristalina e classe
-            metrológica B. Um produto. Feito certo.
+            4 em cada 10 condomínios já possuem hidrômetros prontos para se conectar ao
+            HidroMonitor. Nesses casos não há troca, não há obra: o sistema começa a coletar o
+            consumo de cada unidade e você passa a enxergar tudo em um só lugar.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
               href={WHATSAPP_URL}
               className="rounded-full bg-accent px-7 py-3 font-semibold text-accent-foreground transition-transform hover:scale-105"
             >
-              Pedir pelo WhatsApp
+              Verificar meu condomínio
             </a>
             <a
-              href="#produto"
+              href="#como-funciona"
               className="rounded-full border border-deep-foreground/25 px-7 py-3 font-semibold transition-colors hover:bg-deep-foreground/10"
             >
-              Ver detalhes
+              Como funciona
             </a>
           </div>
         </div>

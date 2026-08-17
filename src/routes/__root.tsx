@@ -80,11 +80,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "viewport",
         content: "width=device-width, initial-scale=1, viewport-fit=cover",
       },
-      { title: "HidroMonitor — Hidrômetro Residencial Classe B" },
+      { title: "HidroMonitor — Gestão inteligente de água para condomínios" },
       {
         name: "description",
         content:
-          "Hidrômetro residencial classe B, certificado ABNT NBR 15538. Precisão, durabilidade e entrega para todo o Brasil.",
+          "Sistema de monitoramento e gestão de água para condomínios. 4 em cada 10 prédios já têm hidrômetros prontos para conectar — sem troca e sem obra.",
       },
       { name: "author", content: "HidroMonitor" },
       // Safari / iOS address & status bar tint
@@ -98,19 +98,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       // Open Graph
       { property: "og:site_name", content: "HidroMonitor" },
       { property: "og:locale", content: "pt_BR" },
-      { property: "og:title", content: "HidroMonitor — Hidrômetro Residencial Classe B" },
+      {
+        property: "og:title",
+        content: "HidroMonitor — Gestão inteligente de água para condomínios",
+      },
       {
         property: "og:description",
         content:
-          "Hidrômetro residencial classe B, certificado ABNT NBR 15538. Precisão, durabilidade e entrega para todo o Brasil.",
+          "Sistema de monitoramento e gestão de água para condomínios. 4 em cada 10 prédios já têm hidrômetros prontos para conectar — sem troca e sem obra.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "HidroMonitor — Hidrômetro Residencial Classe B" },
+      {
+        name: "twitter:title",
+        content: "HidroMonitor — Gestão inteligente de água para condomínios",
+      },
       {
         name: "twitter:description",
         content:
-          "Hidrômetro residencial classe B, certificado ABNT NBR 15538. Precisão, durabilidade e entrega para todo o Brasil.",
+          "Sistema de monitoramento e gestão de água para condomínios. 4 em cada 10 prédios já têm hidrômetros prontos para conectar — sem troca e sem obra.",
       },
       {
         property: "og:image",

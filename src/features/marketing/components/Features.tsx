@@ -1,37 +1,46 @@
 const FEATURES: Array<{ title: string; description: string }> = [
   {
-    title: "Corpo em latão",
-    description: "Resistente à corrosão e à alta pressão, para durar anos sob qualquer clima.",
+    title: "Aproveite o que já está instalado",
+    description:
+      "Boa parte dos condomínios já tem hidrômetros compatíveis com o nosso sistema. Quando é o caso, nada precisa ser trocado.",
   },
   {
-    title: "Classe metrológica B",
-    description: "Alta sensibilidade mesmo em baixas vazões — você paga só pelo que usa.",
+    title: "Consumo real de cada unidade",
+    description:
+      "O rateio deixa de ser estimativa. Cada apartamento passa a ter a própria leitura, com histórico para consultar quando houver contestação.",
   },
   {
-    title: "Leitura cristalina",
-    description: "Visor amplo e protegido, com totalizador de fácil leitura em m³.",
+    title: "Vazamento aparece antes da fatura",
+    description:
+      "O sistema avisa quando o consumo foge do padrão, dando tempo de agir antes que o prejuízo chegue ao boleto.",
   },
   {
-    title: "Padrão ABNT",
-    description: "Conforme a norma NBR 15538, aprovado para uso residencial.",
+    title: "Fim da leitura manual",
+    description:
+      "Sem visita porta a porta, sem planilha e sem erro de digitação. Os dados chegam sozinhos à plataforma.",
   },
   {
-    title: "Instalação simples",
-    description: "Roscas padronizadas que encaixam na maioria das instalações.",
+    title: "Números prontos para a assembleia",
+    description:
+      "Consumo por bloco e por unidade, organizado e fácil de apresentar para o corpo diretivo e para os moradores.",
   },
   {
-    title: "Entrega nacional",
-    description: "Enviamos para todo o Brasil com embalagem reforçada.",
+    title: "Você não precisa entender de tecnologia",
+    description:
+      "Acompanhamos a implantação do início ao fim. Ao síndico cabe apenas olhar os números e tomar decisão.",
   },
 ];
 
 export function Features() {
   return (
-    <section id="produto" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+    <section id="beneficios" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold md:text-4xl">Um único produto. Zero concessões.</h2>
+        <h2 className="text-3xl font-bold md:text-4xl">
+          O problema não é medir. É enxergar o que foi medido.
+        </h2>
         <p className="mt-4 text-muted-foreground">
-          Focamos em fazer um hidrômetro excelente em vez de mil medianos.
+          O HidroMonitor coleta, organiza e mostra o consumo de água do condomínio — para que a
+          gestão pare de trabalhar com achismo.
         </p>
       </div>
 

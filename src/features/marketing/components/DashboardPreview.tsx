@@ -77,7 +77,7 @@ export function DashboardPreview() {
       >
         <span className="inline-flex items-center gap-2">
           <span className="text-base">💧</span>
-          Crie sua conta para monitorar em tempo real
+          Veja o consumo do seu condomínio assim
         </span>
         <span aria-hidden="true">→</span>
       </a>
