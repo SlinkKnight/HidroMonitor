@@ -12,6 +12,11 @@ const PLATFORM_ITEMS: Array<{ title: string; description: string }> = [
       "Quando uma unidade passa do limite de consumo, ela entra na lista de alertas — o primeiro sinal de vazamento ou de uso fora do padrão.",
   },
   {
+    title: "Corte de água à distância",
+    description:
+      "Uma válvula esférica instalada no ponto de medição permite interromper o fornecimento de uma unidade sem que ninguém precise ir até o local — para vazamento fora de hora, manutenção ou unidade desocupada.",
+  },
+  {
     title: "Consumo ao longo do tempo",
     description:
       "Gráfico de 7 ou 30 dias para comparar períodos e mostrar, com número, o efeito de cada decisão tomada.",
@@ -25,11 +30,6 @@ const PLATFORM_ITEMS: Array<{ title: string; description: string }> = [
     title: "Detalhe de cada ponto de medição",
     description:
       "Consumo acumulado, vazão e histórico diário e mensal de cada medidor, isolados em uma tela própria.",
-  },
-  {
-    title: "Vários condomínios na mesma conta",
-    description:
-      "Administradoras organizam a carteira por condomínio e por bloco, e filtram para ver um prédio de cada vez.",
   },
 ];
 
@@ -55,7 +55,8 @@ export function Platform() {
           <p className="mt-5 text-primary-foreground/75">
             O HidroMonitor recebe as leituras, organiza por condomínio, bloco e unidade, e
             transforma isso em números que o síndico consegue ler e apresentar. Não é relatório que
-            chega no fim do mês: a tela mostra o consumo conforme ele acontece.
+            chega no fim do mês: a tela mostra o consumo conforme ele acontece — e, quando é preciso
+            agir, a água de uma unidade pode ser cortada à distância.
           </p>
           <p className="mt-4 text-sm text-primary-foreground/60">
             Funciona no computador e no celular, sem instalar nada.
