@@ -26,9 +26,9 @@ export function Hero() {
             Gestão inteligente da água, com a estrutura que seu condomínio já tem.
           </h1>
           <p className="mt-5 max-w-md text-base text-deep-foreground/70">
-            4 em cada 10 condomínios já possuem hidrômetros prontos para se conectar ao
-            HidroMonitor. Nesses casos não há troca, não há obra: o sistema começa a coletar o
-            consumo de cada unidade e você passa a enxergar tudo em um só lugar.
+            Boa parte dos condomínios já tem hidrômetros prontos para se conectar — sem troca e sem
+            obra. O sistema coleta o consumo de cada unidade e reúne tudo em uma única tela, do
+            total do prédio ao apartamento.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a

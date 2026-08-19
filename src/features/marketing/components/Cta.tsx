@@ -1,9 +1,14 @@
 import { WHATSAPP_URL } from "@/lib/brand";
+import { Wave } from "./Wave";
 
 export function Cta() {
   return (
-    <section className="bg-deep text-deep-foreground">
-      <div className="mx-auto max-w-3xl px-6 py-24 text-center">
+    <section className="relative overflow-hidden bg-deep text-deep-foreground">
+      {/* Same incoming-wave treatment as the blue band: the light FAQ above
+          breaks into the deep footer area instead of cutting straight across. */}
+      <Wave className="absolute -top-px left-0 z-0 h-20 w-full text-background md:h-28" flip />
+
+      <div className="relative z-10 mx-auto max-w-3xl px-6 pb-24 pt-36 text-center md:pt-44">
         <h2 className="text-3xl font-bold md:text-4xl">
           Descubra hoje se o seu condomínio já está pronto.
         </h2>

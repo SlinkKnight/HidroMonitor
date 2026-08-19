@@ -84,7 +84,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Sistema de monitoramento e gestão de água para condomínios. 4 em cada 10 prédios já têm hidrômetros prontos para conectar — sem troca e sem obra.",
+          "Plataforma de monitoramento e gestão de água para condomínios: consumo por unidade, alertas de vazamento e histórico em uma só tela. Sem troca de hidrômetro e sem obra.",
       },
       { name: "author", content: "HidroMonitor" },
       // Safari / iOS address & status bar tint
@@ -105,7 +105,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "Sistema de monitoramento e gestão de água para condomínios. 4 em cada 10 prédios já têm hidrômetros prontos para conectar — sem troca e sem obra.",
+          "Plataforma de monitoramento e gestão de água para condomínios: consumo por unidade, alertas de vazamento e histórico em uma só tela. Sem troca de hidrômetro e sem obra.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -116,7 +116,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "twitter:description",
         content:
-          "Sistema de monitoramento e gestão de água para condomínios. 4 em cada 10 prédios já têm hidrômetros prontos para conectar — sem troca e sem obra.",
+          "Plataforma de monitoramento e gestão de água para condomínios: consumo por unidade, alertas de vazamento e histórico em uma só tela. Sem troca de hidrômetro e sem obra.",
       },
       {
         property: "og:image",
