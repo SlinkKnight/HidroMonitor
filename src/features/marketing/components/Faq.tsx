@@ -8,7 +8,7 @@ const FAQ: Array<{ question: string; answer: string; defaultOpen?: boolean }> = 
   {
     question: "Como sei se o meu condomínio já está pronto?",
     answer:
-      "Essa é a primeira coisa que verificamos, antes de qualquer proposta. Você fala com a gente pelo WhatsApp, informa o condomínio e nós retornamos dizendo se a estrutura atual já permite a conexão ou se vale trocar os hidrômetros com o apoio das nossas parcerias.",
+      "Essa é a primeira coisa que verificamos, antes de qualquer proposta. Você fala com a gente pelo WhatsApp, informa o condomínio e nós retornamos dizendo se a estrutura atual já permite a conexão ou se vale trocar os hidrômetros com o apoio das nossas parcerias. Vale saber que, no nosso levantamento, 4 em cada 10 condomínios já estão prontos — a chance de o seu estar é boa.",
   },
   {
     question: "A instalação gera obra ou incomoda os moradores?",

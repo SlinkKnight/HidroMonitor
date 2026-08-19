@@ -44,6 +44,10 @@ export function Hero() {
               Como funciona
             </a>
           </div>
+          <p className="mt-6 max-w-md text-sm text-deep-foreground/50">
+            Nosso levantamento de mercado mostra que 4 em cada 10 condomínios já estão prontos para
+            conectar. O seu pode ser um deles.
+          </p>
         </div>
 
         <div ref={cardRef} className="flex justify-center">
