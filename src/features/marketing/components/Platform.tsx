@@ -1,5 +1,12 @@
 import { Wave } from "./Wave";
 
+/** Destaque da seção: é o único item que age sobre a água, e não só a observa. */
+const VALVE = {
+  title: "Corte de água à distância",
+  description:
+    "Uma válvula esférica instalada no ponto de medição permite interromper o fornecimento de uma unidade sem que ninguém precise ir até o local — para vazamento fora de hora, manutenção ou unidade desocupada.",
+};
+
 const PLATFORM_ITEMS: Array<{ title: string; description: string }> = [
   {
     title: "Visão geral do condomínio",
@@ -10,11 +17,6 @@ const PLATFORM_ITEMS: Array<{ title: string; description: string }> = [
     title: "Unidades em alerta",
     description:
       "Quando uma unidade passa do limite de consumo, ela entra na lista de alertas — o primeiro sinal de vazamento ou de uso fora do padrão.",
-  },
-  {
-    title: "Corte de água à distância",
-    description:
-      "Uma válvula esférica instalada no ponto de medição permite interromper o fornecimento de uma unidade sem que ninguém precise ir até o local — para vazamento fora de hora, manutenção ou unidade desocupada.",
   },
   {
     title: "Consumo ao longo do tempo",
@@ -63,14 +65,24 @@ export function Platform() {
           </p>
         </div>
 
-        <ul className="divide-y divide-primary-foreground/15">
-          {PLATFORM_ITEMS.map((item) => (
-            <li key={item.title} className="py-5 first:pt-0 last:pb-0">
-              <h3 className="font-display text-lg font-semibold">{item.title}</h3>
-              <p className="mt-1.5 text-sm text-primary-foreground/70">{item.description}</p>
-            </li>
-          ))}
-        </ul>
+        <div>
+          <div className="rounded-2xl border border-primary-foreground/30 bg-primary-foreground/10 p-6">
+            <span className="inline-block rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent-foreground">
+              Diferencial
+            </span>
+            <h3 className="mt-4 font-display text-xl font-bold">{VALVE.title}</h3>
+            <p className="mt-2 text-sm text-primary-foreground/80">{VALVE.description}</p>
+          </div>
+
+          <ul className="mt-6 divide-y divide-primary-foreground/15">
+            {PLATFORM_ITEMS.map((item) => (
+              <li key={item.title} className="py-5 first:pt-0 last:pb-0">
+                <h3 className="font-display text-lg font-semibold">{item.title}</h3>
+                <p className="mt-1.5 text-sm text-primary-foreground/70">{item.description}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <Wave className="absolute -bottom-px left-0 h-24 w-full text-background md:h-32" />

@@ -25,9 +25,9 @@ const FEATURES: Array<{ title: string; description: string }> = [
       "Consumo por bloco e por unidade, organizado e fácil de apresentar para o corpo diretivo e para os moradores.",
   },
   {
-    title: "Você não precisa entender de tecnologia",
+    title: "Feche a água sem sair do lugar",
     description:
-      "Acompanhamos a implantação do início ao fim. Ao síndico cabe apenas olhar os números e tomar decisão.",
+      "A válvula esférica no ponto de medição corta o fornecimento de uma unidade à distância. Vazamento de madrugada não espera o encanador chegar.",
   },
 ];
 
