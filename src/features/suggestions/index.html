@@ -191,7 +191,15 @@
     display: block; font-weight: 600; font-size: 13px;
     margin-bottom: 7px; color: #33405a;
   }
+  label .opt { font-weight: 500; color: #8a97ad; }
   .field { margin-bottom: 16px; }
+
+  /* aviso da LGPD: dados técnicos de acesso são registrados */
+  .aviso-dados {
+    margin-top: 14px; font-size: 11.5px; line-height: 1.45;
+    color: var(--card-mut); text-align: center;
+  }
+  .aviso-dados a { color: var(--card-mut); text-decoration: underline; }
 
   input, textarea {
     width: 100%; padding: 12px 13px;
@@ -322,7 +330,7 @@
           Envie pelo formulário — sua mensagem chega na hora, pelo WhatsApp.
         </p>
         <ul class="steps">
-          <li><span class="n">1</span><span class="t"><b>Deixe seus dados</b> <span>— nome, e-mail e telefone</span></span></li>
+          <li><span class="n">1</span><span class="t"><b>Deixe seus dados</b> <span>— nome e telefone (e-mail é opcional)</span></span></li>
           <li><span class="n">2</span><span class="t"><b>Escreva sua mensagem</b> <span>— dúvida ou sugestão</span></span></li>
           <li><span class="n">3</span><span class="t"><b>Enviar</b> <span>— falamos com você pelo WhatsApp</span></span></li>
         </ul>
@@ -342,7 +350,7 @@
           </div>
 
           <div class="field" id="c-email">
-            <label for="email">E-mail</label>
+            <label for="email">E-mail <span class="opt">(opcional)</span></label>
             <input type="email" id="email" name="email" placeholder="voce@email.com" autocomplete="email" />
             <span class="err">Informe um e-mail válido.</span>
           </div>
@@ -365,6 +373,12 @@
           </button>
 
           <div class="status" id="status"></div>
+
+          <p class="aviso-dados">
+            Registramos dados técnicos do acesso (tipo de aparelho, sistema, navegador e IP
+            aproximado) para melhorar esta página. Para pedir a exclusão dos seus dados, escreva
+            para <a href="mailto:kohlrauschvictor@gmail.com">kohlrauschvictor@gmail.com</a>.
+          </p>
         </form>
       </div>
 
@@ -441,7 +455,8 @@
 
     let ok = true;
     bad("c-nome", !nome);                                    if (!nome) ok = false;
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    // E-mail agora e opcional: so reprova se preencheram em formato invalido.
+    const emailOk = !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     bad("c-email", !emailOk);                                if (!emailOk) ok = false;
     bad("c-telefone", !telefone);                            if (!telefone) ok = false;
     bad("c-mensagem", !mensagem);                            if (!mensagem) ok = false;
@@ -450,7 +465,7 @@
     const texto =
       "*Nova mensagem — HidroMonitor*\n\n" +
       "Nome: " + nome + "\n" +
-      "E-mail: " + email + "\n" +
+      (email ? "E-mail: " + email + "\n" : "") +
       "Telefone: " + telefone + "\n" +
       "Mensagem: " + mensagem;
 
@@ -471,12 +486,209 @@
       }).catch(function () {});
     }
 
+    // Etapa C do funil: guarda a sugestao e marca a visita como "enviou".
+    // Protegido: se o rastreio nao carregou, o envio segue exatamente como antes.
+    if (window.__funil) window.__funil.registrarEnvio({ nome, email, telefone, mensagem });
+
     // guarda o link do WhatsApp e mostra a janela de confirmação
     waLink = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(texto);
     status.className = "status"; status.textContent = "";
     form.reset();
     modal.classList.add("open");
   });
+</script>
+<script>
+  /* =====================================================================
+     FUNIL DE ACESSO — mede quantas pessoas abrem a pagina, quantas comecam
+     a preencher e quantas enviam.
+
+     Todo este bloco e isolado e a prova de falha: qualquer erro aqui dentro
+     e engolido e o formulario acima continua funcionando normalmente. Nada
+     aqui bloqueia a renderizacao nem o envio da sugestao.
+
+     A pagina nao fala com o banco: manda para /api/funil e /api/sugestao,
+     que gravam no servidor. Nenhuma chave do Supabase existe nesta pagina.
+     ===================================================================== */
+  (function () {
+    "use strict";
+
+    var API_VISITA   = "/api/funil";
+    var API_SUGESTAO = "/api/sugestao";
+    var CHAVE_SESSAO      = "hm_funil_sessao";      // sessionStorage: uma aba
+    var CHAVE_DISPOSITIVO = "hm_funil_dispositivo"; // localStorage: pessoa unica
+
+    function novoId() {
+      try {
+        if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
+      } catch (e) {}
+      return "id-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
+    }
+
+    /* Le o identificador ja gravado ou cria um. Em aba anonima com
+       armazenamento bloqueado, devolve um id solto e segue em frente. */
+    function identificador(armazem, chave) {
+      try {
+        var atual = armazem.getItem(chave);
+        if (atual) return atual;
+        var novo = novoId();
+        armazem.setItem(chave, novo);
+        return novo;
+      } catch (e) {
+        return novoId();
+      }
+    }
+
+    var idSessao = identificador(window.sessionStorage, CHAVE_SESSAO);
+    var idDispositivo = identificador(window.localStorage, CHAVE_DISPOSITIVO);
+
+    /* ---------- classificacao feita aqui, para o banco guardar valor limpo ---------- */
+
+    function tipoDeAparelho(ua) {
+      if (/iPad|Tablet|PlayBook|Silk/i.test(ua)) return "tablet";
+      if (/Android/i.test(ua) && !/Mobile/i.test(ua)) return "tablet";
+      /* iPad recente se anuncia como Mac; o toque e o que o entrega */
+      if (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1) return "tablet";
+      if (/Mobi|iPhone|iPod|Android|Windows Phone/i.test(ua)) return "celular";
+      return "computador";
+    }
+
+    function sistema(ua) {
+      if (/Windows/i.test(ua)) return "Windows";
+      if (/Android/i.test(ua)) return "Android";
+      if (/iPhone|iPad|iPod/i.test(ua)) return "iOS";
+      if (/Macintosh|Mac OS X/i.test(ua)) return navigator.maxTouchPoints > 1 ? "iOS" : "macOS";
+      if (/Linux/i.test(ua)) return "Linux";
+      return "outro";
+    }
+
+    /* A ordem importa: quase todo navegador mente dizendo tambem ser Chrome
+       e Safari, entao os mais especificos precisam ser testados primeiro. */
+    function navegador(ua) {
+      if (/Edg\//i.test(ua)) return "Edge";
+      if (/OPR\/|Opera/i.test(ua)) return "Opera";
+      if (/SamsungBrowser/i.test(ua)) return "Samsung";
+      if (/Firefox|FxiOS/i.test(ua)) return "Firefox";
+      if (/Chrome|CriOS/i.test(ua)) return "Chrome";
+      if (/Safari/i.test(ua)) return "Safari";
+      return "outro";
+    }
+
+    function coletar() {
+      var ua = navigator.userAgent || "";
+      var busca = {};
+      try {
+        var p = new URLSearchParams(window.location.search);
+        busca.src = p.get("src");
+        busca.utm = p.get("utm_campaign");
+      } catch (e) {}
+      var conexao = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      var fuso = null;
+      try { fuso = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) {}
+
+      return {
+        id_sessao: idSessao,
+        id_dispositivo: idDispositivo,
+
+        origem: busca.src || null,
+        utm_campaign: busca.utm || null,
+        referrer: document.referrer || null,
+
+        tipo_aparelho: tipoDeAparelho(ua),
+        sistema: sistema(ua),
+        navegador: navegador(ua),
+        user_agent: ua,
+
+        tela_largura: window.screen ? window.screen.width : null,
+        tela_altura: window.screen ? window.screen.height : null,
+        viewport_largura: window.innerWidth || null,
+        viewport_altura: window.innerHeight || null,
+        pixel_ratio: window.devicePixelRatio || null,
+
+        cpu_nucleos: navigator.hardwareConcurrency || null,
+        /* memoria e conexao so existem em navegadores Chromium; no iPhone vem nulo */
+        memoria_gb: navigator.deviceMemory || null,
+        conexao: conexao ? conexao.effectiveType || null : null,
+
+        idioma: navigator.language || null,
+        fuso: fuso
+      };
+    }
+
+    function enviar(url, corpo) {
+      try {
+        return fetch(url, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(corpo),
+          keepalive: true
+        }).catch(function () {});
+      } catch (e) {
+        return Promise.resolve();
+      }
+    }
+
+    /* As etapas B e C alteram a linha criada pela etapa A. Se dispararem antes
+       de a etapa A chegar ao banco, nao encontram nada para atualizar — por
+       isso ambas esperam a promessa do acesso terminar. */
+    var acessoRegistrado = null;
+    function aposAcesso(acao) {
+      var espera = acessoRegistrado || Promise.resolve();
+      espera.then(acao, acao);
+    }
+
+    /* ---------- etapa A: acesso ---------- */
+    function registrarAcesso() {
+      acessoRegistrado = enviar(API_VISITA, coletar());
+    }
+
+    /* ---------- etapa B: primeiro toque no formulario ---------- */
+    var jaIniciou = false;
+    function ligarInteracao() {
+      var form = document.getElementById("form");
+      if (!form) return;
+      function umaVezSo() {
+        if (jaIniciou) return;
+        jaIniciou = true;
+        form.removeEventListener("focusin", umaVezSo);
+        form.removeEventListener("input", umaVezSo);
+        aposAcesso(function () {
+          enviar(API_VISITA, { acao: "interacao", id_sessao: idSessao });
+        });
+      }
+      form.addEventListener("focusin", umaVezSo);
+      form.addEventListener("input", umaVezSo);
+    }
+
+    /* ---------- etapa C: chamada por uma linha no envio do formulario ---------- */
+    window.__funil = {
+      registrarEnvio: function (sugestao) {
+        try {
+          aposAcesso(function () {
+            enviar(API_SUGESTAO, {
+              id_sessao: idSessao,
+              nome: sugestao.nome,
+              email: sugestao.email,
+              telefone: sugestao.telefone,
+              mensagem: sugestao.mensagem
+            });
+          });
+        } catch (e) {}
+      }
+    };
+
+    /* Depois da renderizacao, para nao competir com a pintura da pagina. */
+    function comecar() {
+      try {
+        registrarAcesso();
+        ligarInteracao();
+      } catch (e) {}
+    }
+    if (document.readyState === "complete") {
+      setTimeout(comecar, 0);
+    } else {
+      window.addEventListener("load", function () { setTimeout(comecar, 0); });
+    }
+  })();
 </script>
 </body>
 </html>

@@ -11,12 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SugestaoRouteImport } from './routes/sugestao'
+import { Route as PainelRouteImport } from './routes/painel'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthVerifyRouteImport } from './routes/auth.verify'
 import { Route as AuthSignupRouteImport } from './routes/auth.signup'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
+import { Route as ApiSugestaoRouteImport } from './routes/api.sugestao'
+import { Route as ApiFunilRouteImport } from './routes/api.funil'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard/index'
 import { Route as AuthenticatedDashboardConfiguracoesRouteImport } from './routes/_authenticated/dashboard/configuracoes'
@@ -33,6 +36,11 @@ const TermsRoute = TermsRouteImport.update({
 const SugestaoRoute = SugestaoRouteImport.update({
   id: '/sugestao',
   path: '/sugestao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PainelRoute = PainelRouteImport.update({
+  id: '/painel',
+  path: '/painel',
   getParentRoute: () => rootRouteImport,
 } as any)
 const McpRoute = McpRouteImport.update({
@@ -62,6 +70,16 @@ const AuthSignupRoute = AuthSignupRouteImport.update({
 const AuthLoginRoute = AuthLoginRouteImport.update({
   id: '/auth/login',
   path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSugestaoRoute = ApiSugestaoRouteImport.update({
+  id: '/api/sugestao',
+  path: '/api/sugestao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFunilRoute = ApiFunilRouteImport.update({
+  id: '/api/funil',
+  path: '/api/funil',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Char91DotwellKnownChar93OauthProtectedResourceRoute =
@@ -111,9 +129,12 @@ const AuthenticatedDashboardCondominiosCondominioIdDispositivosDeviceIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/mcp': typeof McpRoute
+  '/painel': typeof PainelRoute
   '/sugestao': typeof SugestaoRoute
   '/terms': typeof TermsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/api/funil': typeof ApiFunilRoute
+  '/api/sugestao': typeof ApiSugestaoRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/auth/verify': typeof AuthVerifyRoute
@@ -127,9 +148,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/mcp': typeof McpRoute
+  '/painel': typeof PainelRoute
   '/sugestao': typeof SugestaoRoute
   '/terms': typeof TermsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/api/funil': typeof ApiFunilRoute
+  '/api/sugestao': typeof ApiSugestaoRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/auth/verify': typeof AuthVerifyRoute
@@ -145,9 +169,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/mcp': typeof McpRoute
+  '/painel': typeof PainelRoute
   '/sugestao': typeof SugestaoRoute
   '/terms': typeof TermsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/api/funil': typeof ApiFunilRoute
+  '/api/sugestao': typeof ApiSugestaoRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/auth/verify': typeof AuthVerifyRoute
@@ -163,9 +190,12 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/mcp'
+    | '/painel'
     | '/sugestao'
     | '/terms'
     | '/.well-known/oauth-protected-resource'
+    | '/api/funil'
+    | '/api/sugestao'
     | '/auth/login'
     | '/auth/signup'
     | '/auth/verify'
@@ -179,9 +209,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/mcp'
+    | '/painel'
     | '/sugestao'
     | '/terms'
     | '/.well-known/oauth-protected-resource'
+    | '/api/funil'
+    | '/api/sugestao'
     | '/auth/login'
     | '/auth/signup'
     | '/auth/verify'
@@ -196,9 +229,12 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/mcp'
+    | '/painel'
     | '/sugestao'
     | '/terms'
     | '/.well-known/oauth-protected-resource'
+    | '/api/funil'
+    | '/api/sugestao'
     | '/auth/login'
     | '/auth/signup'
     | '/auth/verify'
@@ -214,9 +250,12 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   McpRoute: typeof McpRoute
+  PainelRoute: typeof PainelRoute
   SugestaoRoute: typeof SugestaoRoute
   TermsRoute: typeof TermsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  ApiFunilRoute: typeof ApiFunilRoute
+  ApiSugestaoRoute: typeof ApiSugestaoRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthSignupRoute: typeof AuthSignupRoute
   AuthVerifyRoute: typeof AuthVerifyRoute
@@ -237,6 +276,13 @@ declare module '@tanstack/react-router' {
       path: '/sugestao'
       fullPath: '/sugestao'
       preLoaderRoute: typeof SugestaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/painel': {
+      id: '/painel'
+      path: '/painel'
+      fullPath: '/painel'
+      preLoaderRoute: typeof PainelRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mcp': {
@@ -279,6 +325,20 @@ declare module '@tanstack/react-router' {
       path: '/auth/login'
       fullPath: '/auth/login'
       preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/sugestao': {
+      id: '/api/sugestao'
+      path: '/api/sugestao'
+      fullPath: '/api/sugestao'
+      preLoaderRoute: typeof ApiSugestaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/funil': {
+      id: '/api/funil'
+      path: '/api/funil'
+      fullPath: '/api/funil'
+      preLoaderRoute: typeof ApiFunilRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.well-known/oauth-protected-resource': {
@@ -359,10 +419,13 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   McpRoute: McpRoute,
+  PainelRoute: PainelRoute,
   SugestaoRoute: SugestaoRoute,
   TermsRoute: TermsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
+  ApiFunilRoute: ApiFunilRoute,
+  ApiSugestaoRoute: ApiSugestaoRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthSignupRoute: AuthSignupRoute,
   AuthVerifyRoute: AuthVerifyRoute,
