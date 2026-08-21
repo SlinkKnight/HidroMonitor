@@ -51,6 +51,9 @@ SUPABASE_SERVICE_ROLE_KEY=cole_a_chave_aqui
 E também no ambiente do deploy. **Esta chave ignora todas as regras de acesso do
 banco — ela nunca pode ir para o navegador nem para o repositório.**
 
+> Ao concluir este passo o funil comeca a gravar IP e identificador de aparelho.
+> **Descomente o aviso de LGPD no `index.html` antes de publicar.**
+
 ### 3. Liberar o seu acesso ao painel
 
 O painel fica em `/painel` e exige conta criada em `/auth/signup`. Depois de
@@ -128,8 +131,12 @@ sugestão continua funcionando, só a medição se perde).
 - O IP é gravado **mascarado**: `189.45.12.77` vira `189.45.12.0`.
 - Não há GPS, câmera, notificação nem fingerprinting de canvas, WebGL ou áudio.
   Nada pede permissão ao visitante.
-- A página exibe aviso de que dados técnicos de acesso são registrados, com
-  e-mail de contato para pedido de exclusão.
+- **O aviso na página está desativado.** Enquanto o funil não grava nada, ele
+  foi comentado no HTML a pedido. O bloco continua em `index.html`, logo
+  abaixo do `<div class="status">`, pronto para descomentar.
+  **Descomente ao concluir os passos 1 e 2 desta página**: a partir dali
+  passam a ser gravados IP e identificador de aparelho, que são dados
+  pessoais pela Lei 13.709/2018.
 - Para atender a um pedido de exclusão:
   ```sql
   DELETE FROM sugestoes WHERE telefone = '51999998888';
