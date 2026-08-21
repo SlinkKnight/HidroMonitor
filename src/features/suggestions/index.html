@@ -124,6 +124,19 @@
     transition: background .15s;
   }
   .nav-actions .buy:hover { background: #1a4494; }
+  /* botao redondo do Instagram — fica visivel em qualquer largura, ao
+     contrario do .buy, que some abaixo de 640px */
+  .nav-actions .social {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; flex: none;
+    border-radius: 999px;
+    color: rgba(244,249,255,.92);
+    border: 1px solid rgba(255,255,255,.28);
+    background: rgba(255,255,255,.10);
+    transition: background .15s, color .15s;
+  }
+  .nav-actions .social:hover { background: rgba(255,255,255,.20); color: #5FD0FF; }
+  .nav-actions .social svg { width: 19px; height: 19px; }
   @media (min-width: 640px) {
     .nav-actions .buy { display: inline-flex; }
   }
@@ -283,6 +296,15 @@
   }
   .footer strong { color: var(--card-ink); font-weight: 700; }
   .footer .sub { color: #7a879c; margin-top: 4px; font-size: 12.5px; }
+  .footer .redes { margin-top: 12px; }
+  .footer .redes a {
+    display: inline-flex; align-items: center; gap: 7px;
+    color: #47566d; text-decoration: none;
+    font-size: 13px; font-weight: 600;
+    transition: color .15s;
+  }
+  .footer .redes a:hover { color: var(--card-ink); }
+  .footer .redes svg { width: 16px; height: 16px; }
 
   /* ---------- ajustes de celular ---------- */
   @media (max-width: 560px) {
@@ -313,6 +335,10 @@
           <span class="name"><span class="hidro">Hidro</span><span class="monitor">Monitor</span></span>
         </a>
         <div class="nav-actions">
+          <a class="social" href="https://instagram.com/hidromonitor" target="_blank"
+             rel="noopener noreferrer" aria-label="Instagram do HidroMonitor" title="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
           <a class="buy" href="/">Contato</a>
         </div>
       </div>
@@ -392,6 +418,12 @@
   <footer class="footer">
     <strong>HidroMonitor</strong> — Taquara Summit
     <div class="sub">Prevenção e monitoramento em tempo real do fluxo de água</div>
+    <div class="redes">
+      <a href="https://instagram.com/hidromonitor" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @hidromonitor
+      </a>
+    </div>
   </footer>
 
   <!-- janela de confirmação -->
