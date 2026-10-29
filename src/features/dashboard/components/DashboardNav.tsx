@@ -8,7 +8,7 @@ export function DashboardNav() {
   const signOut = useSignOut();
 
   function handleSignOut() {
-    signOut.mutate(undefined, { onSuccess: () => navigate({ to: "/" }) });
+    signOut.mutate(undefined, { onSuccess: () => navigate({ to: "/", reloadDocument: true }) });
   }
 
   return (

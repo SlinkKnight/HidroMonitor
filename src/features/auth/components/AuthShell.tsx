@@ -39,7 +39,7 @@ export function AuthShell({
         <div className="flex-1 flex-col justify-center py-10">
           <div className="rounded-2xl border border-white/10 bg-white p-6 sm:p-8">
             <div className="mb-6 flex flex-col items-center text-center">
-              <Link to="/" className="inline-flex items-center gap-2.5 mb-4">
+              <Link to="/" reloadDocument className="inline-flex items-center gap-2.5 mb-4">
                 <LogoMark size={44} />
                 <span className="font-semibold tracking-tight" style={{ fontSize: 22 }}>
                   <span style={{ color: BRAND_COLORS.hidroOnLight }}>Hidro</span>

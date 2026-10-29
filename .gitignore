@@ -37,3 +37,6 @@ dist-ssr
 *.sln
 *.sw?
 .dyad/
+
+# build da landing feito pelos testes (o index.html real fica em src/features/landing)
+public/landing/index.html

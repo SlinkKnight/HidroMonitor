@@ -1,0 +1,1 @@
+(function(){self.onmessage=()=>{let e=``;try{let t=new OffscreenCanvas(1,1).getContext(`webgl2`);if(t){let n=t.getExtension(`WEBGL_debug_renderer_info`);e=String(n?t.getParameter(n.UNMASKED_RENDERER_WEBGL):t.getParameter(t.RENDERER)),t.getExtension(`WEBGL_lose_context`)?.loseContext()}else e=`none`}catch{e=`none`}self.postMessage(e)}})();

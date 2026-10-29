@@ -71,7 +71,7 @@ export function DashboardSidebar({
 
   function handleSignOut() {
     onNavigate?.();
-    signOut.mutate(undefined, { onSuccess: () => navigate({ to: "/" }) });
+    signOut.mutate(undefined, { onSuccess: () => navigate({ to: "/", reloadDocument: true }) });
   }
 
   return (
